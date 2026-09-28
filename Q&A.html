@@ -1,0 +1,2885 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة زعبوط - الاختبارات والكويزات والإجابات</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+
+:root {
+    --primary: #1a3a6b;
+    --primary-light: #2c5aa0;
+    --primary-dark: #0f2444;
+    --accent: #e91e63;
+    --accent-light: #ff6090;
+    --success: #2e7d32;
+    --warning: #f57c00;
+    --danger: #c62828;
+    --bg: #f5f7fa;
+    --card-bg: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #555;
+    --border: #e0e4eb;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --radius: 16px;
+}
+
+/* ===== الوضع الليلي ===== */
+html[data-theme="dark"] {
+    --primary: #2c5aa0;
+    --primary-light: #4a7bc8;
+    --primary-dark: #0a1525;
+    --accent: #ff4081;
+    --accent-light: #ff6090;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --danger: #ef5350;
+    --bg: #0f1419;
+    --card-bg: #1a2332;
+    --text: #e8edf6;
+    --text-light: #a0aec0;
+    --border: #2d3748;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    direction: rtl;
+    line-height: 1.9;
+    font-size: 16px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* ===== شريط التنقل ===== */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-brand span {
+    background: var(--accent);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.navbar-links { display: flex; gap: 4px; flex-wrap: wrap; }
+
+.navbar-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+}
+
+.navbar-links a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+.navbar-links a.active { background: rgba(255,255,255,0.25); color: #fff; font-weight: 700; }
+
+/* ===== أزرار الإجراءات (العودة + الوضع) ===== */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.back-btn {
+    background: var(--accent) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+    font-size: 13px;
+    border: 2px solid transparent;
+}
+
+.back-btn:hover {
+    background: #c2185b !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.08);
+}
+
+/* ===== شريط البحث ===== */
+.search-bar {
+    background: var(--primary-dark);
+    padding: 12px 24px;
+    position: sticky;
+    top: 64px;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+
+.search-input {
+    width: 100%;
+    padding: 12px 48px 12px 20px;
+    border-radius: 30px;
+    border: 2px solid transparent;
+    background: rgba(255,255,255,0.95);
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s;
+    color: var(--text);
+}
+
+.search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(233,30,99,0.15);
+}
+
+.search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--primary);
+    pointer-events: none;
+}
+
+.search-clear {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-clear.visible { display: flex; }
+
+/* ===== نتائج البحث ===== */
+.search-results-panel {
+    max-width: 1200px;
+    margin: 12px auto 0;
+    background: #fff;
+    border-radius: 14px;
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.search-results-panel.visible { display: block; }
+
+.search-results-header {
+    padding: 12px 20px;
+    background: #f0f4ff;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.search-result-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.search-result-item:hover { background: #f0f4ff; }
+.search-result-item:last-child { border-bottom: none; }
+
+.search-result-icon {
+    background: var(--primary);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.search-result-content { flex: 1; }
+
+.search-result-title {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.search-result-snippet {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.search-result-snippet mark,
+.search-result-title mark {
+    background: #fff59d;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+}
+
+.search-no-results {
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+/* ===== الحاويات ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* ===== رأس الصفحة ===== */
+.chapter-header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: #fff;
+    padding: 48px 40px;
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+}
+
+.chapter-header .chapter-num {
+    display: inline-block;
+    background: var(--accent);
+    padding: 4px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.chapter-header h1 {
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.chapter-header .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== بطاقات الأقسام ===== */
+.section-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, background 0.3s, border-color 0.3s;
+    scroll-margin-top: 150px;
+}
+
+.section-card h2 {
+    color: var(--primary);
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-card h2 .icon { font-size: 26px; }
+
+.section-card h3 {
+    color: var(--primary-light);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    scroll-margin-top: 150px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border);
+}
+
+.section-card h4 {
+    color: var(--accent);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 18px 0 10px;
+}
+
+.section-card p { margin-bottom: 12px; color: var(--text-light); }
+
+/* ===== بطاقات الفهرس ===== */
+.toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.toc-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.toc-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(233,30,99,0.15);
+}
+
+.toc-card .toc-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.toc-card .toc-title {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.toc-card .toc-desc {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.toc-card.accent .toc-icon { background: linear-gradient(135deg, #c2185b, var(--accent)); }
+.toc-card.success .toc-icon { background: linear-gradient(135deg, #1b5e20, var(--success)); }
+.toc-card.warning .toc-icon { background: linear-gradient(135deg, #e65100, var(--warning)); }
+
+/* ===== روابط سريعة ===== */
+.lesson-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 24px;
+    padding: 16px;
+    background: #f0f4ff;
+    border-radius: 12px;
+    transition: background 0.3s;
+}
+
+.lesson-nav a {
+    background: #fff;
+    border: 2px solid var(--primary-light);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.lesson-nav a:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ===== صناديق التنبيه ===== */
+.alert-box {
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin: 16px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.alert-box.info { background: #e3f2fd; border-right: 5px solid #1976d2; }
+.alert-box.warning { background: #fff3e0; border-right: 5px solid var(--warning); }
+.alert-box.success { background: #e8f5e9; border-right: 5px solid var(--success); }
+.alert-box.danger { background: #ffebee; border-right: 5px solid var(--danger); }
+
+.alert-box .alert-icon { font-size: 24px; flex-shrink: 0; }
+.alert-box .alert-content { flex: 1; }
+.alert-box .alert-content strong { display: block; margin-bottom: 4px; font-size: 16px; color: var(--text); }
+.alert-box .alert-content p { margin: 0; font-size: 15px; color: var(--text-light); }
+
+/* ===== الجداول ===== */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 500px;
+}
+
+table thead {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+}
+
+table th {
+    padding: 12px 16px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-light);
+}
+
+table tbody tr:nth-child(even) { background: #f8f9fc; }
+table tbody tr:hover { background: #eef1f8; }
+
+.answer-table thead { background: linear-gradient(135deg, #1b5e20, var(--success)); }
+.answer-table td:first-child {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    width: 60px;
+}
+.answer-table td:nth-child(2) {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    width: 60px;
+}
+
+/* ===== الأسئلة ===== */
+.question-box {
+    background: #fafbfc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 14px 0;
+    transition: border-color 0.3s, background 0.3s;
+    scroll-margin-top: 150px;
+}
+
+.question-box:hover { border-color: var(--primary-light); }
+
+.question-box .q-num {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.question-box .q-text { font-weight: 600; color: var(--text); font-size: 16px; }
+.question-box .q-options { margin-top: 12px; padding-right: 20px; }
+.question-box .q-options li { margin-bottom: 6px; font-size: 15px; color: var(--text-light); }
+
+/* ===== الإجابات ===== */
+.answer-section {
+    background: #e8f5e9;
+    border-right: 5px solid var(--success);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 12px 0 20px;
+    font-size: 15px;
+    color: var(--text);
+}
+
+.answer-section .answer-label {
+    display: inline-block;
+    background: var(--success);
+    color: #fff;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* ===== الفوتر المطابق لـ index.html ===== */
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 26px 0;
+    margin-top: 10px;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: var(--text-light);
+    font-family: monospace;
+}
+
+.footer-social {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.footer-social a {
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: color 0.15s, transform 0.15s, border-color 0.15s, background 0.15s;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background: rgba(233,30,99,0.1);
+}
+
+.footer-social svg {
+    width: 19px;
+    height: 19px;
+    pointer-events: none;
+}
+
+/* ===== الوضع الليلي - تعديلات إضافية ===== */
+html[data-theme="dark"] .navbar {
+    background: linear-gradient(135deg, #000, var(--primary-dark));
+}
+
+html[data-theme="dark"] .search-bar {
+    background: var(--primary-dark);
+}
+
+html[data-theme="dark"] .search-input {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+html[data-theme="dark"] .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+html[data-theme="dark"] .search-icon {
+    color: #fff;
+}
+
+html[data-theme="dark"] .search-results-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+}
+
+html[data-theme="dark"] .search-results-header {
+    background: #253345;
+    color: var(--text);
+    border-bottom-color: var(--border);
+}
+
+html[data-theme="dark"] .search-result-item {
+    border-bottom-color: var(--border);
+    color: var(--text);
+}
+
+html[data-theme="dark"] .search-result-item:hover {
+    background: #253345;
+}
+
+html[data-theme="dark"] .search-result-title {
+    color: var(--accent);
+}
+
+html[data-theme="dark"] .search-result-snippet {
+    color: var(--text-light);
+}
+
+html[data-theme="dark"] .search-result-snippet mark,
+html[data-theme="dark"] .search-result-title mark {
+    background: #ffeb3b;
+    color: #000;
+}
+
+html[data-theme="dark"] .section-card h2 { color: #fff; }
+html[data-theme="dark"] .section-card h3 { color: var(--accent); }
+html[data-theme="dark"] .section-card h4 { color: var(--accent-light); }
+
+html[data-theme="dark"] .toc-card .toc-title { color: #fff; }
+
+html[data-theme="dark"] .lesson-nav {
+    background: #253345;
+}
+
+html[data-theme="dark"] .lesson-nav a {
+    background: var(--card-bg);
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+}
+
+html[data-theme="dark"] .lesson-nav a:hover {
+    background: var(--primary-light);
+    color: #fff;
+}
+
+html[data-theme="dark"] table {
+    background: var(--card-bg);
+}
+
+html[data-theme="dark"] table th {
+    background: linear-gradient(135deg, #000, var(--primary-dark));
+    color: #fff;
+}
+
+html[data-theme="dark"] table td {
+    border-bottom-color: var(--border);
+    color: var(--text-light);
+}
+
+html[data-theme="dark"] table tbody tr:nth-child(even) {
+    background: #253345;
+}
+
+html[data-theme="dark"] table tbody tr:hover {
+    background: #2d3d52;
+}
+
+html[data-theme="dark"] .question-box {
+    background: #253345;
+    border-color: var(--border);
+}
+
+html[data-theme="dark"] .question-box .q-text { color: var(--text); }
+html[data-theme="dark"] .question-box .q-options li { color: var(--text-light); }
+
+html[data-theme="dark"] .answer-section {
+    background: #1e3a2a;
+    color: var(--text);
+}
+
+html[data-theme="dark"] .alert-box.info { background: #1a2a44; color: var(--text); }
+html[data-theme="dark"] .alert-box.warning { background: #3d2f1a; color: var(--text); }
+html[data-theme="dark"] .alert-box.success { background: #1e3a2a; color: var(--text); }
+html[data-theme="dark"] .alert-box.danger { background: #3d1e1e; color: var(--text); }
+
+html[data-theme="dark"] .chapter-header {
+    background: linear-gradient(135deg, #000, var(--primary));
+}
+
+html[data-theme="dark"] .back-btn:hover {
+    background: #c2185b !important;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.5);
+}
+
+/* ===== الاستجابة ===== */
+@media (max-width: 768px) {
+    .container { padding: 16px 12px 60px; }
+    .chapter-header { padding: 28px 20px; }
+    .chapter-header h1 { font-size: 22px; }
+    .section-card { padding: 20px; }
+    .section-card h2 { font-size: 18px; }
+    .navbar-inner { padding: 10px 0; }
+    .navbar-links a { padding: 6px 10px; font-size: 12px; }
+    table { font-size: 13px; }
+    table th, table td { padding: 8px 10px; }
+    .search-bar { top: 0; }
+    .search-results-panel { max-height: 300px; }
+    .navbar-actions { order: -1; margin-left: auto; }
+    .back-btn { padding: 6px 12px !important; font-size: 12px; }
+    .theme-toggle { width: 36px; height: 36px; font-size: 16px; }
+    .footer-inner { flex-direction: column; text-align: center; }
+}
+
+@media print {
+    .navbar, .search-bar, .search-results-panel, .navbar-actions { display: none; }
+    .section-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== شريط التنقل ===== -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            📘 منصة زعبوط <span>اختبارات و كويزات - ترم اول</span>
+        </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="#home" data-page="home" class="active">الرئيسية</a>
+            <a href="#book-answers" data-page="book-answers">إجابات الكتاب</a>
+            <a href="#quizzes" data-page="quizzes">الكويزات</a>
+            <a href="#exams" data-page="exams">الاختبارات</a>
+            <a href="#answers" data-page="answers">الإجابات</a>
+        </div>
+        <div class="navbar-actions">
+            <a href="index.html" class="back-btn" title="العودة إلى المنصة التعليمية">🏠 العودة للمنصة</a>
+            <button class="theme-toggle" id="themeToggle" title="تبديل الوضع الليلي/النهاري" aria-label="تبديل الوضع">🌙</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== شريط البحث ===== -->
+<div class="search-bar">
+    <div class="search-inner">
+        <input type="text" class="search-input" id="searchInput" placeholder="ابحث في الإجابات والكويزات والاختبارات...">
+        <span class="search-icon">🔍</span>
+        <button class="search-clear" id="searchClear" type="button">✕</button>
+    </div>
+    <div class="search-results-panel" id="searchPanel">
+        <div class="search-results-header" id="searchHeader"></div>
+        <div id="searchResultsList"></div>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================
+     الصفحة الرئيسية
+     ============================================ -->
+<div id="page-home" class="page-content">
+    <div class="chapter-header" style="text-align:center; padding: 60px 40px;">
+        <div class="chapter-num">منصة زعبوط 2027</div>
+        <h1 style="font-size: 34px;">الاختبارات و الكويزات للترم الأول بالاجابات +إجابات الكتاب المدرسي</h1>
+        <div class="subtitle" style="font-size: 17px; margin-top: 10px;">البرمجة والذكاء الاصطناعي — الصف الثاني الثانوي بكالوريا</div>
+        <div style="margin-top: 24px; font-size: 15px; opacity: 0.9;">
+            <p>إجابات الكتاب | 14 كويز | 3 اختبارات شاملة | إجابات نموذجية كاملة</p>
+        </div>
+    </div>
+
+    <!-- إحصائيات -->
+    <div class="section-card">
+        <h2><span class="icon">📊</span> نظرة عامة على المحتوى</h2>
+        <div class="toc-grid">
+            <div class="toc-card success">
+                <div class="toc-icon">📖</div>
+                <div class="toc-title">إجابات الكتاب</div>
+                <div class="toc-desc">جميع إجابات أسئلة كتاب المدرسة للفصول الأربعة</div>
+            </div>
+            <div class="toc-card success">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">14 كويز</div>
+                <div class="toc-desc">20 سؤال لكل كويز — 25 درجة (15 MCQ + 5 مقالي)</div>
+            </div>
+            <div class="toc-card accent">
+                <div class="toc-icon">🎓</div>
+                <div class="toc-title">3 اختبارات شاملة</div>
+                <div class="toc-desc">متوسط + متقدم + محاكاة زمنية</div>
+            </div>
+            <div class="toc-card">
+                <div class="toc-icon">✅</div>
+                <div class="toc-title">إجابات كاملة</div>
+                <div class="toc-desc">مفاتيح MCQ + إجابات مقالية نموذجية</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتويات بروابط سريعة -->
+    <div class="section-card">
+        <h2><span class="icon">📑</span> المحتويات - روابط سريعة</h2>
+        <p>اضغط على أي بطاقة للانتقال مباشرة إلى المحتوى المطلوب.</p>
+
+        <h3>إجابات كتاب المدرسة</h3>
+        <div class="toc-grid">
+            <div class="toc-card success" onclick="goTo('book-answers', 'ba-ch1')">
+                <div class="toc-icon">📘</div>
+                <div class="toc-title">إجابات الفصل الأول</div>
+                <div class="toc-desc">تكنولوجيا المعلومات والمجتمع - 4 دروس</div>
+            </div>
+            <div class="toc-card success" onclick="goTo('book-answers', 'ba-ch2')">
+                <div class="toc-icon">🔐</div>
+                <div class="toc-title">إجابات الفصل الثاني</div>
+                <div class="toc-desc">الأمن السيبراني - 3 دروس</div>
+            </div>
+            <div class="toc-card success" onclick="goTo('book-answers', 'ba-ch3')">
+                <div class="toc-icon">🌐</div>
+                <div class="toc-title">إجابات الفصل الثالث</div>
+                <div class="toc-desc">تطبيقات الويب - 3 دروس</div>
+            </div>
+            <div class="toc-card success" onclick="goTo('book-answers', 'ba-ch4')">
+                <div class="toc-icon">🎨</div>
+                <div class="toc-title">إجابات الفصل الرابع</div>
+                <div class="toc-desc">تصميم الويب والوسائط - 4 دروس</div>
+            </div>
+        </div>
+
+        <h3>الكويزات (14 كويز)</h3>
+        <div class="toc-grid">
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-1-1')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 01 - الدرس 1-1</div>
+                <div class="toc-desc">تطور تكنولوجيا المعلومات والتحول الاجتماعي</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-1-2')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 02 - الدرس 1-2</div>
+                <div class="toc-desc">كيف يعمل الذكاء الاصطناعي</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-1-3')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 03 - الدرس 1-3</div>
+                <div class="toc-desc">الذكاء الاصطناعي في الحياة والصناعة</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-1-4')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 04 - الدرس 1-4</div>
+                <div class="toc-desc">القضايا الأخلاقية للذكاء الاصطناعي</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-2-1')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 05 - الدرس 2-1</div>
+                <div class="toc-desc">تقنيات التشفير والمصادقة</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-2-2')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 06 - الدرس 2-2</div>
+                <div class="toc-desc">تصميم أمن الشبكات</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-2-3')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 07 - الدرس 2-3</div>
+                <div class="toc-desc">الاستجابة للحوادث وإدارة المخاطر</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-3-1')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 08 - الدرس 3-1</div>
+                <div class="toc-desc">البنية العامة لتطبيقات الويب</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-3-2')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 09 - الدرس 3-2</div>
+                <div class="toc-desc">طرق الاتصال في تطبيقات الويب</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-3-3')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 10 - الدرس 3-3</div>
+                <div class="toc-desc">أساسيات تكنولوجيا الواجهة الأمامية</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-4-1')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 11 - الدرس 4-1</div>
+                <div class="toc-desc">أنواع الوسائط وخصائصها</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-4-2')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 12 - الدرس 4-2</div>
+                <div class="toc-desc">تصميم المعلومات وتجربة المستخدم</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-4-3')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 13 - الدرس 4-3</div>
+                <div class="toc-desc">أساليب تقييم المواقع الإلكترونية</div>
+            </div>
+            <div class="toc-card" onclick="goTo('quizzes', 'quiz-4-4')">
+                <div class="toc-icon">📝</div>
+                <div class="toc-title">Quiz 14 - الدرس 4-4</div>
+                <div class="toc-desc">عملية التحسين التكراري للمواقع</div>
+            </div>
+        </div>
+
+        <h3>الاختبارات الشاملة</h3>
+        <div class="toc-grid">
+            <div class="toc-card success" onclick="goTo('exams', 'exam-1')">
+                <div class="toc-icon">📋</div>
+                <div class="toc-title">اختبار شامل 1 - متوسط</div>
+                <div class="toc-desc">50 دقيقة — MCQ + صح/خطأ + مصطلحات</div>
+            </div>
+            <div class="toc-card success" onclick="goTo('exams', 'exam-2')">
+                <div class="toc-icon">🎓</div>
+                <div class="toc-title">اختبار شامل 2 - متقدم</div>
+                <div class="toc-desc">60 دقيقة — تحليل وربط المفاهيم</div>
+            </div>
+            <div class="toc-card success" onclick="goTo('exams', 'exam-3')">
+                <div class="toc-icon">⏱️</div>
+                <div class="toc-title">اختبار محاكاة زمني</div>
+                <div class="toc-desc">70 دقيقة — شامل لكل الفصول</div>
+            </div>
+        </div>
+
+        <h3>الإجابات النموذجية</h3>
+        <div class="toc-grid">
+            <div class="toc-card accent" onclick="goTo('answers', 'ans-quizzes')">
+                <div class="toc-icon">✅</div>
+                <div class="toc-title">الإجابات</div>
+                <div class="toc-desc">مفاتيح MCQ + إجابات مقالية نموذجية</div>
+            </div>
+            <div class="toc-card accent" onclick="goTo('answers', 'ans-exams')">
+                <div class="toc-icon">✅</div>
+                <div class="toc-title">إجابات الاختبارات</div>
+                <div class="toc-desc">جميع إجابات الاختبارات الشاملة</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- كيف تستخدم -->
+    <div class="section-card">
+        <h2><span class="icon">💡</span> كيف تستخدم هذا الموقع؟</h2>
+        <div class="toc-grid">
+            <div class="toc-card">
+                <div class="toc-icon">1️⃣</div>
+                <div class="toc-title">راجع إجابات الكتاب</div>
+                <div class="toc-desc">ابدأ بمراجعة إجابات أسئلة كتاب المدرسة للدروس التي تريد اختبارها.</div>
+            </div>
+            <div class="toc-card">
+                <div class="toc-icon">2️⃣</div>
+                <div class="toc-title">حل الكويزات</div>
+                <div class="toc-desc">اذهب لقسم الكويزات وحل الأسئلة دون النظر للإجابات.</div>
+            </div>
+            <div class="toc-card">
+                <div class="toc-icon">3️⃣</div>
+                <div class="toc-title">راجع الإجابات</div>
+                <div class="toc-desc">انتقل لقسم الإجابات لمقارنة إجاباتك بالنموذج.</div>
+            </div>
+            <div class="toc-card">
+                <div class="toc-icon">4️⃣</div>
+                <div class="toc-title">اختبر نفسك</div>
+                <div class="toc-desc">بعد المراجعة، حل الاختبارات الشاملة لقياس مستواك النهائي.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     صفحة إجابات كتاب المدرسة
+     ============================================ -->
+<div id="page-book-answers" class="page-content hidden">
+    <div class="chapter-header">
+        <div class="chapter-num">نموذج الإجابة</div>
+        <h1>إجابات كتاب المدرسة</h1>
+        <div class="subtitle">إجابات أسئلة كتاب المدرسة لجميع دروس الفصول الأربعة</div>
+    </div>
+
+    <div class="section-card">
+        <h2><span class="icon">📖</span> دليل استخدام إجابات الكتاب</h2>
+        <p>هنا تجد إجابات أسئلة كتاب المدرسة لكل درس في الفصول الأربعة، بدون الحاجة للرجوع للفصول نفسها.</p>
+        <div class="alert-box warning">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">
+                <strong>تنبيه تصحيح</strong>
+                <p>الإجابات المفتوحة «نموذجية»؛ تقبل صياغة أخرى إذا تضمنت نفس المفاهيم والعلاقات المطلوبة في السؤال.</p>
+            </div>
+        </div>
+
+        <div class="lesson-nav" style="margin-top:20px;">
+            <a onclick="scrollToId('ba-ch1')">📘 الفصل الأول</a>
+            <a onclick="scrollToId('ba-ch2')">🔐 الفصل الثاني</a>
+            <a onclick="scrollToId('ba-ch3')">🌐 الفصل الثالث</a>
+            <a onclick="scrollToId('ba-ch4')">🎨 الفصل الرابع</a>
+        </div>
+    </div>
+
+    <!-- ============ إجابات الفصل الأول ============ -->
+    <div class="section-card" id="ba-ch1">
+        <h2><span class="icon">📘</span> إجابات الفصل الأول - تكنولوجيا المعلومات والمجتمع</h2>
+
+        <!-- الدرس 1-1 -->
+        <h3>الدرس 1-1: تطور تكنولوجيا المعلومات والتحول الاجتماعي</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>ب - بداية ظهور الحاسب ← تسويق الإنترنت تجاريًا ← ظهور الهواتف الذكية ← انتشار الحوسبة السحابية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - قانون مور ملاحظة تاريخية بأن عدد الترانزستورات يتضاعف تقريبًا كل عامين.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - يواجه استمرار تصغير مكونات الدوائر تحديات هندسية وفيزيائية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - شبكات التواصل الاجتماعي فعالة جدًا في نشر المعلومات بسرعة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5</span><p>خطأ - التجارة الإلكترونية تعني شراء السلع عبر الإنترنت وليس من المتاجر الفعلية بالنقد.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6 (مطابقة)</span><p>القيادة الذاتية (أ) - الواقع المعزز (ب) - الواقع الافتراضي (ج).</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>قانون مور Moore's Law.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>التجارة الإلكترونية E-commerce.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>العمل عن بعد Remote Work.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>الدفع غير النقدي Cashless Payment.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 11</span><p>القيادة الذاتية Autonomous Driving.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 12</span><p>البريد الإلكتروني - وسائل التواصل الاجتماعي.</p></div>
+
+        <!-- الدرس 1-2 -->
+        <h3>الدرس 1-2: كيف يعمل الذكاء الاصطناعي</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>خطأ: التعلم العميق أسلوب ضمن التعلم الآلي ويعتمد على شبكات عصبية متعددة الطبقات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: AI هو المجال الأوسع وML فرع منه.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - الذكاء الاصطناعي التوليدي تقنية تستخدم التعلم العميق لتوليد بيانات جديدة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: AI وML ليسا المعنى نفسه.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>ML = تعلم الأنماط من البيانات - DL = شبكات عصبية لتعلم أنماط معقدة - Generative AI = إنشاء بيانات/محتوى جديد.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>الذكاء الاصطناعي Artificial Intelligence (AI).</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>التعلم الآلي Machine Learning (ML).</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>التعلم العميق Deep Learning (DL).</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>الذكاء الاصطناعي التوليدي Generative AI.</p></div>
+
+        <!-- الدرس 1-3 -->
+        <h3>الدرس 1-3: الذكاء الاصطناعي في الحياة اليومية والصناعة</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>مطابقة: توصيات يوتيوب = نظام التوصية، التحدث للهاتف = المساعد الصوتي، ترجمة موقع = الترجمة الآلية، فتح الهاتف بالوجه = التعرف على الوجه.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - AI بارع في الاستدلال الاحتمالي والتنبؤ.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - AI بارع في التعرف على الصور والصوت والنص.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: القرارات الأخلاقية والعالية الأثر تحتاج إشرافًا بشريًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5</span><p>صح - قد تقل الدقة عند تحيز بيانات التدريب.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>نظام التوصية Recommendation System.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>المساعد الصوتي Voice Assistant.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>التشخيص بالصور Image Diagnosis.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>الصيانة التنبؤية Predictive Maintenance.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>ب - اكتشاف الأنماط وتصنيفها من نقاط قوة AI وليس سببًا للحذر.</p></div>
+
+        <!-- الدرس 1-4 -->
+        <h3>الدرس 1-4: القضايا الأخلاقية للذكاء الاصطناعي</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - التحيز الخوارزمي نمط في النتائج قد يؤدي إلى معاملة غير عادلة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: عدم وضوح عملية القرار مشكلة خاصة في القرارات المهمة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - الشفافية تتضمن توضيح أن AI مستخدم والبيانات والعوامل المؤثرة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: يجب تحديد المسؤوليات والمساءلة مسبقًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>عدم التمييز = العدالة، إتاحة معلومات واضحة = الشفافية، حماية المعلومات = الخصوصية، تحديد الجهة المسؤولة = المساءلة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>التحيز الخوارزمي Algorithmic Bias.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>الذكاء الاصطناعي القابل للتفسير XAI.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>حماية الخصوصية Privacy.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>العدالة = تقييم دون تمييز، الشفافية = الإفصاح عن طريقة القرار، الخصوصية = عدم استخدام البيانات لغرض آخر، المساءلة = وجود جهة يمكن محاسبتها.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>ج - بطء سرعة الحاسوب ليس سببًا مباشرًا للتحيز الخوارزمي.</p></div>
+    </div>
+
+    <!-- ============ إجابات الفصل الثاني ============ -->
+    <div class="section-card" id="ba-ch2">
+        <h2><span class="icon">🔐</span> إجابات الفصل الثاني - الأمن السيبراني</h2>
+
+        <!-- الدرس 2-1 -->
+        <h3>الدرس 2-1: تقنيات التشفير والمصادقة</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>خطأ: آليات المفتاح العام تستخدم في التحقق/الاتفاق على المفاتيح، ثم يحمي التشفير المتماثل بيانات الجلسة بكفاءة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - HTTPS يحمي البيانات أثناء النقل.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>خطأ: كلمتا مرور تنتميان إلى فئة المعرفة نفسها.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - 2FA يستخدم عاملين مختلفين.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5</span><p>الشهادة الرقمية تربط هوية الموقع/الخادم بمفتاح عام، وآليات المفتاح العام تساعد في التحقق والاتفاق الآمن على مفاتيح الجلسة ضمن TLS.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>TLS - Transport Layer Security.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>التشفير المتماثل Symmetric Encryption.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>2FA - المصادقة الثنائية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>الشهادة الرقمية Digital Certificate.</p></div>
+
+        <!-- الدرس 2-2 -->
+        <h3>الدرس 2-2: تصميم أمن الشبكات</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - جدار الحماية يسمح أو يمنع الاتصال وفق قواعد محددة مسبقًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - VPN قد تقلل مخاطر التنصت على شبكة Wi-Fi عامة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>خطأ: DMZ تعزل الخوادم العامة عن الشبكة الداخلية الحساسة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - الدفاع في العمق يعني استخدام إجراءات أمنية متعددة في طبقات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>(أ) = Firewall، (ب) = VPN، (ج) = DMZ.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>جدار الحماية Firewall.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>VPN - Virtual Private Network.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>DMZ - Demilitarized Zone.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>الدفاع في العمق Defense in Depth.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>ج - VPN لا يحذف الملفات المصابة بالفيروسات تلقائيًا.</p></div>
+
+        <!-- الدرس 2-3 -->
+        <h3>الدرس 2-3: الاستجابة للحوادث وإدارة المخاطر</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - الحادث الأمني واقعة تؤثر أو تهدد سرية المعلومات أو سلامتها أو توافرها.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - التحضير يشمل الخطط والأدوار والنسخ الاحتياطية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - الاكتشاف يتعرف على مؤشرات الحادث.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - الاحتواء يحد من انتشار الحادث.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5</span><p>الاستئصال Eradication - إزالة سبب التهديد.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>الاستعادة Recovery - إعادة الأنظمة للعمل الآمن.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>الدروس المستفادة Lessons Learned - تحليل ما حدث وتحسين الإجراءات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>المخاطرة Risk - احتمال حدوث ضرر مع مراعاة الاحتمال والأثر.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>الاحتمالية Likelihood - مدى ترجيح وقوع حدث.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>الأثر Impact - حجم الضرر الناتج إذا وقع الخطر.</p></div>
+    </div>
+
+    <!-- ============ إجابات الفصل الثالث ============ -->
+    <div class="section-card" id="ba-ch3">
+        <h2><span class="icon">🌐</span> إجابات الفصل الثالث - تطبيقات الويب</h2>
+
+        <!-- الدرس 3-1 -->
+        <h3>الدرس 3-1: البنية العامة لتطبيقات الويب</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - الواجهة الأمامية هي الجزء الذي يراه المستخدمون ويتفاعلون معه.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: Backend يعمل عادة في جانب الخادم لا في المتصفح فقط.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - قاعدة البيانات نظام ينظم البيانات ويخزنها ويديرها.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: تتعاون الواجهة الأمامية والخلفية وطبقة البيانات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>المعالجة من جانب الخادم = Backend، الشاشة التي يتفاعل معها المستخدم = Frontend، تخزين البيانات = Data Layer.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>تطبيق الويب Web Application.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>Frontend.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>Backend.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>قاعدة البيانات / Data Layer.</p></div>
+
+        <!-- الدرس 3-2 -->
+        <h3>الدرس 3-2: طرق الاتصال في تطبيقات الويب</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - العميل هو الذي يرسل الطلب.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - الخادم يستقبل الطلبات ويعالجها.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>خطأ: GET يستخدم لطلب/جلب بيانات، POST لإرسال بيانات/إنشاء أو تنفيذ عملية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - HTTPS يحمي الاتصال.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>HTTP = بروتوكول طلب/استجابة، API = واجهة تحدد طريقة التفاعل، HTTPS = HTTP عبر TLS.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>Client - العميل.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>Server - الخادم.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>GET.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>POST.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>ج - القول إن 200 يعني نجاح الطلب صحيح؛ 500 يشير إلى مشكلة من جهة الخادم.</p></div>
+
+        <!-- الدرس 3-3 -->
+        <h3>الدرس 3-3: أساسيات تكنولوجيا الواجهة الأمامية</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - HTML يبني هيكل الصفحة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: JavaScript مسؤول أساسًا عن السلوك والتفاعل، بينما CSS للمظهر.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - Semantic HTML يساعد قارئ الشاشة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - Responsive Design يتكيف مع الشاشات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>HTML = البنية والمحتوى، CSS = المظهر والتخطيط، JavaScript = السلوك والتفاعل.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>HTML.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>JavaScript.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>Responsive Design - التصميم المتجاوب.</p></div>
+    </div>
+
+    <!-- ============ إجابات الفصل الرابع ============ -->
+    <div class="section-card" id="ba-ch4">
+        <h2><span class="icon">🎨</span> إجابات الفصل الرابع - تصميم الويب والوسائط</h2>
+
+        <!-- الدرس 4-1 -->
+        <h3>الدرس 4-1: أنواع الوسائط وخصائصها</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - الموقع الإلكتروني يمكنه عرض النص والصور والصوت والفيديو معًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: التلفزيون لا يتيح عادة تفاعلًا ثنائي الاتجاه مباشرًا مع المستخدمين.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - وسائل التواصل الاجتماعي فعالة جدًا في نشر المعلومات بسرعة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: الموقع الإلكتروني يحتاج اتصالًا بالإنترنت في الاستخدام المعتاد.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>التلفزيون = إعلام عدد كبير بالفيديو في وقت واحد، الموقع = تفاصيل يمكن الرجوع إليها في أي وقت، وسائل التواصل = تشجيع المشاركة والانتشار السريع.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>نقاط قوة الموقع: يجمع نصًا وصورًا وصوتًا وفيديو، قابل للتحديث، يقدم تفاصيل عميقة، ويمكن أن يدعم التفاعل والخدمات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>قيود الموقع: يحتاج إنترنت/جهاز، يحتاج أن يصل إليه المستخدم، ويتطلب تحديثًا وصيانة وإتاحة وأمانًا جيدًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>ب - الوسيلة التي تجمع أنواع محتوى متعددة وتحديثًا مستمرًا هي الموقع الإلكتروني.</p></div>
+
+        <!-- الدرس 4-2 -->
+        <h3>الدرس 4-2: تصميم المعلومات وتجربة المستخدم للمواقع</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - Persona تمثيل لنمط من المستخدمين يستند إلى بحث أو بيانات.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: Wireframe مخطط مبكر قليل التفاصيل البصرية وليس التصميم النهائي.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - التقارب يعني تجميع المعلومات المرتبطة قريبًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: UCD يضع احتياجات المستخدم وسياقه في مركز القرار.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>إبراز العناوين = Contrast، توحيد الخط واللون = Repetition، محاذاة العناصر = Alignment، جمع المعلومات المرتبطة = Proximity.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>Persona.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>Wireframe.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>CRAP.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>User-Centered Design (UCD).</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>ج - التصميم الذي يبدأ باحتياجات المستخدم وسياق الاستخدام هو UCD.</p></div>
+
+        <!-- الدرس 4-3 -->
+        <h3>الدرس 4-3: أساليب تقييم المواقع الإلكترونية</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>خطأ: التقييم النوعي يعتمد على الملاحظة والمقابلات والأدلة الوصفية، لا الأرقام أساسًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>صح - PV يوضح إجمالي مرات مشاهدة صفحة، وقد تشمل مشاهدات متكررة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>خطأ: Bounce Rate ليس CVR.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>صح - التقييم الإرشادي طريقة يحدد فيها الخبراء مشكلات الواجهة استنادًا إلى قواعد عملية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>PV = إجمالي مشاهدات الصفحات، Bounce Rate = جلسات/زيارات ذات تفاعل محدود، CVR = نسبة من يحققون الإجراء المستهدف.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>التقييم النوعي Qualitative Evaluation.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>التقييم الكمي Quantitative Evaluation.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>PV - Page Views.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>التقييم الإرشادي Heuristic Evaluation.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>د - A/B Testing وتحليلات الويب من الأساليب الكمية.</p></div>
+
+        <!-- الدرس 4-4 -->
+        <h3>الدرس 4-4: عملية التحسين التكراري للمواقع</h3>
+        <div class="answer-section"><span class="answer-label">إجابة 1</span><p>صح - PDCA تكرر الخطوات الأربع: خطط - نفذ - تحقق - تصرف.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 2</span><p>خطأ: التفكير التصميمي يبدأ من فهم المستخدم لا المطور فقط.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 3</span><p>صح - لعزل الأثر يجب أن تختلف النسختان في عنصر محدد.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 4</span><p>خطأ: PDCA دورة تكرارية.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 5 (مطابقة)</span><p>فهم تحديات المستخدم = Empathize، توضيح المشكلة = Define، توليد أفكار كثيرة = Ideate، إنشاء نموذج أولي = Prototype، جعل المستخدمين يجربون النموذج = Test.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 6</span><p>PDCA - Plan, Do, Check, Act.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 7</span><p>Design Thinking - التفكير التصميمي.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 8</span><p>A/B Testing.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 9</span><p>ج - Check يقيس النتائج ويقارنها بالهدف/خط الأساس.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 10</span><p>ب - تغيير عدة عناصر معًا غير مناسب إذا كان الهدف معرفة أثر تغيير واحد.</p></div>
+    </div>
+</div>
+
+<!-- ============================================
+     صفحة الكويزات
+     ============================================ -->
+<div id="page-quizzes" class="page-content hidden">
+    <div class="chapter-header">
+        <div class="chapter-num">مذكرة الكويزات</div>
+        <h1>14 كويز - 20 سؤال لكل درس</h1>
+        <div class="subtitle">25 درجة لكل كويز | الأسئلة فقط - الإجابات في قسم منفصل</div>
+    </div>
+
+    <div class="lesson-nav">
+        <a onclick="scrollToId('quiz-1-1')">Quiz 01</a>
+        <a onclick="scrollToId('quiz-1-2')">Quiz 02</a>
+        <a onclick="scrollToId('quiz-1-3')">Quiz 03</a>
+        <a onclick="scrollToId('quiz-1-4')">Quiz 04</a>
+        <a onclick="scrollToId('quiz-2-1')">Quiz 05</a>
+        <a onclick="scrollToId('quiz-2-2')">Quiz 06</a>
+        <a onclick="scrollToId('quiz-2-3')">Quiz 07</a>
+        <a onclick="scrollToId('quiz-3-1')">Quiz 08</a>
+        <a onclick="scrollToId('quiz-3-2')">Quiz 09</a>
+        <a onclick="scrollToId('quiz-3-3')">Quiz 10</a>
+        <a onclick="scrollToId('quiz-4-1')">Quiz 11</a>
+        <a onclick="scrollToId('quiz-4-2')">Quiz 12</a>
+        <a onclick="scrollToId('quiz-4-3')">Quiz 13</a>
+        <a onclick="scrollToId('quiz-4-4')">Quiz 14</a>
+    </div>
+
+    <div class="section-card">
+        <h2><span class="icon">📋</span> نظام كل كويز</h2>
+        <div class="alert-box info">
+            <div class="alert-icon">📌</div>
+            <div class="alert-content">
+                <strong>الدرجة النهائية 25 درجة</strong>
+                <p>الجزء الأول 15 سؤال اختيار من متعدد (15 درجة)، والجزء الثاني 5 أسئلة مقالية وتطبيقية (10 درجات).</p>
+                <p style="margin-top:8px;"><strong>ملاحظة:</strong> جميع الإجابات النموذجية متاحة في قسم <a onclick="showPage('answers')" style="color:var(--success); font-weight:700; cursor:pointer; text-decoration:underline;">الإجابات</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 01 -->
+    <div class="section-card" id="quiz-1-1">
+        <h2><span class="icon">📝</span> Quiz 01 • Lesson 1-1: تطور تكنولوجيا المعلومات والتحول الاجتماعي</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">شركة تشرح اتجاهًا تاريخيًا لزيادة كثافة الترانزستورات ولا تأتي أن سرعة كل جهاز تتضاعف حرفيًا.</span>
+            <ol class="q-options" type="a"><li>Moore's Law - قانون مور</li><li>Cashless Payment - الدفع غير النقدي</li><li>AR - الواقع المعزز</li><li>Autonomous Driving - القيادة الذاتية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">مدرسة تحفظ ملفاتها وتشغّل خدماتها من خوادم بعيدة عبر الإنترنت بدل الاعتماد على جهاز محلي واحد.</span>
+            <ol class="q-options" type="a"><li>E-commerce - التجارة الإلكترونية</li><li>Cloud Computing - الحوسبة السحابية</li><li>VR - الواقع الافتراضي</li><li>Quantum Computing - الحوسبة الكمومية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">مركبة تعالج بيانات مستشعراتها محليًا لاتخاذ قرار كبح خلال أجزاء من الثانية.</span>
+            <ol class="q-options" type="a"><li>Remote Work - العمل عن بُعد</li><li>Autonomous Driving - القيادة الذاتية</li><li>Edge Computing - الحوسبة الطرفية</li><li>Moore's Law - قانون مور</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">عميل يدفع قيمة مشترياته ببطاقة أو تطبيق هاتف أو رمز QR.</span>
+            <ol class="q-options" type="a"><li>AR - الواقع المعزز</li><li>Quantum Computing - الحوسبة الكمومية</li><li>Cloud Computing - الحوسبة السحابية</li><li>Cashless Payment - الدفع غير النقدي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">متجر يصل إلى عملاء خارج موقعه الجغرافي ويستقبل الطلبات عبر موقع إلكتروني.</span>
+            <ol class="q-options" type="a"><li>E-commerce - التجارة الإلكترونية</li><li>VR - الواقع الافتراضي</li><li>Moore's Law - قانون مور</li><li>Edge Computing - الحوسبة الطرفية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">موظف ينجز مهامه من مدينة أخرى ويتصل بأنظمة المؤسسة عبر الشبكة.</span>
+            <ol class="q-options" type="a"><li>Autonomous Driving - القيادة الذاتية</li><li>Remote Work - العمل عن بُعد</li><li>Cloud Computing - الحوسبة السحابية</li><li>Cashless Payment - الدفع غير النقدي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">طالب يوجه الهاتف إلى نموذج حقيقي فتظهر فوقه أسماء الأجزاء ومعلومات رقمية.</span>
+            <ol class="q-options" type="a"><li>Quantum Computing - الحوسبة الكمومية</li><li>Edge Computing - الحوسبة الطرفية</li><li>AR - الواقع المعزز</li><li>E-commerce - التجارة الإلكترونية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">متدرب يرتدي نظارة وينتقل إلى محاكاة رقمية كاملة لمعمل افتراضي.</span>
+            <ol class="q-options" type="a"><li>Moore's Law - قانون مور</li><li>Cashless Payment - الدفع غير النقدي</li><li>Remote Work - العمل عن بُعد</li><li>VR - الواقع الافتراضي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">سيارة تجمع بيانات الطريق من كاميرات ومستشعرات ثم تحللها لاتخاذ قرار قيادة.</span>
+            <ol class="q-options" type="a"><li>Autonomous Driving - القيادة الذاتية</li><li>Cloud Computing - الحوسبة السحابية</li><li>E-commerce - التجارة الإلكترونية</li><li>AR - الواقع المعزز</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">فريق يبحث عن أسلوب مختلف لمسألة متخصصة دون افتراض أنه بديل عام لكل الحواسيب.</span>
+            <ol class="q-options" type="a"><li>Edge Computing - الحوسبة الطرفية</li><li>Quantum Computing - الحوسبة الكمومية</li><li>Remote Work - العمل عن بُعد</li><li>VR - الواقع الافتراضي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي ترتيب يعكس مسار التطور العام الأقرب لما ورد في الدرس؟</span>
+            <ol class="q-options" type="a"><li>حواسيب إلكترونية ← حاسب شخصي ← إنترنت وويب ← هواتف ذكية ← سحابة وذكاء اصطناعي</li><li>هواتف ذكية ← حاسب شخصي ← إنترنت ← حواسيب إلكترونية</li><li>سحابة ← حواسيب إلكترونية ← هواتف ذكية ← إنترنت</li><li>إنترنت ← صماعات مفرغة ← سحابة ← حاسب شخصي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">عند تباطؤ الاستفادة من تصغير الترانزستورات، أي اتجاه يتفق مع الدرس لتحسين الأداء؟</span>
+            <ol class="q-options" type="a"><li>إلغاء المعالجة المتوازية</li><li>استخدام تعدد الأنوية والتصميمات المتخصصة</li><li>زيادة حجم الأجهزة فقط</li><li>التوقف عن تحسين المعالجات</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">قرية وصلها إنترنت سريع وخدمات دفع رقمية، لكن جزءًا من السكان لا يملك هاتفًا مناسبًا. أي قرار أكثر توازنًا؟</span>
+            <ol class="q-options" type="a"><li>إلغاء النقد فورًا</li><li>منع الخدمات الرقمية</li><li>توفير قنوات رقمية مع بديل مناسب لمن لا يملك الوسيلة</li><li>إجبار الجميع على شراء جهاز واحد</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">أي عبارة أدق عن الحوسبة الكمومية؟</span>
+            <ol class="q-options" type="a"><li>تجعل كل عملية أسرع دائمًا</li><li>هي المرحلة التالية الحتمية لقانون مور</li><li>بديل عام لكل الحواسيب التقليدية</li><li>قد تتفوق في مسائل محددة ولا تستبدل الحواسيب في كل شيء</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">شركة تحتاج تحليلًا فوريًا لبيانات حساسات آلة ثم إرسال ملخصات للتخزين الطويل. أي تصميم أنسب؟</span>
+            <ol class="q-options" type="a"><li>المعالجة الطرفية للقرار العاجل ثم السحابة للتخزين والتحليل الأوسع</li><li>إرسال كل البيانات إلى بريد إلكتروني أولًا</li><li>الاعتماد على الواقع الافتراضي</li><li>استخدام الدفع غير النقدي</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين الحوسبة السحابية والحوسبة الطرفية من حيث مكان المعالجة وزمن الاستجابة، ثم اذكر موقفًا مناسبًا لكل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح كيف غيّرت الهواتف الذكية والإنترنت طريقة الوصول إلى التعلم والعمل والخدمات، مع مثالين واضحين. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">فسر قانون مور باعتباره اتجاهًا تاريخيًا، ثم اذكر سببًا يجعل تحسين الأداء لا يعتمد على تصغير الترانزستورات فقط. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">مدينة تريد التحول بدرجة كبيرة إلى الدفع غير النقدي. حلل فائدة واحدة، وتحديًا يتعلق بالوصول أو العدالة، واقترح إجراءً يقلل المشكلة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">صمم سيناريو لمركبة ذاتية القيادة يوضح لماذا يجب أن تُعالج بعض البيانات عند الحافة محليًا، وما الذي يمكن إرساله لاحقًا إلى السحابة. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 02 -->
+    <div class="section-card" id="quiz-1-2">
+        <h2><span class="icon">📝</span> Quiz 02 • Lesson 1-2: كيف يعمل الذكاء الاصطناعي</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">نظام يجمع بين التعرف والتنبؤ وتقديم توصيات لمهام محددة.</span>
+            <ol class="q-options" type="a"><li>الشبكة العصبية الاصطناعية - ANN</li><li>Training Data - بيانات التدريب</li><li>الذكاء الاصطناعي - AI</li><li>Classification - التصنيف</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">مرشح يتعلم من رسائل سابقة لتمييز الرسائل المزعجة.</span>
+            <ol class="q-options" type="a"><li>الذكاء الاصطناعي التوليدي - Generative AI</li><li>Narrow AI - الذكاء الضيق</li><li>البرمجة الصريحة - Explicit Programming</li><li>Machine Learning - التعلم الآلي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">نموذج متعدد الطبقات يحلل صورًا كثيرة للتعرف على عناصر داخلها.</span>
+            <ol class="q-options" type="a"><li>التعلم العميق - Deep Learning</li><li>Hallucination - الهلوسة</li><li>التصنيف - Classification</li><li>AI - الذكاء الاصطناعي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">نموذج تتغير علاقاته الداخلية أثناء التدريب حتى يتحسن في التصنيف.</span>
+            <ol class="q-options" type="a"><li>بيانات التدريب - Training Data</li><li>ANN - الشبكة العصبية الاصطناعية</li><li>البرمجة الصريحة - Explicit Programming</li><li>Machine Learning - التعلم الآلي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">أداة تنشئ فقرة أو صورة جديدة استجابة لوصف المستخدم.</span>
+            <ol class="q-options" type="a"><li>الذكاء الضيق - Narrow AI</li><li>AI - الذكاء الاصطناعي</li><li>الذكاء الاصطناعي التوليدي - Generative AI</li><li>Deep Learning - التعلم العميق</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">تقرير آلي يتضمن أرقامًا تبدو دقيقة لكنها بلا مصدر موثوق.</span>
+            <ol class="q-options" type="a"><li>Classification - التصنيف</li><li>Machine Learning - التعلم الآلي</li><li>ANN - الشبكة العصبية</li><li>Hallucination - الهلوسة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">نموذج زراعي يواجه مرضًا نادرًا لأنه رأى أمثلة قليلة جدًا عليه أثناء التدريب.</span>
+            <ol class="q-options" type="a"><li>Training Data - بيانات التدريب</li><li>Explicit Programming - البرمجة الصريحة</li><li>Deep Learning - التعلم العميق</li><li>Generative AI - الذكاء الاصطناعي التوليدي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">نظام ممتاز في التعرف على الصور لكنه لا يمتلك قدرة عامة على كل المهام البشرية.</span>
+            <ol class="q-options" type="a"><li>AI - الذكاء الاصطناعي</li><li>Narrow AI - الذكاء الضيق</li><li>ANN - الشبكة العصبية</li><li>Hallucination - الهلوسة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">تحديد رسالة جديدة على أنها Spam أو Not Spam.</span>
+            <ol class="q-options" type="a"><li>Machine Learning - التعلم الآلي</li><li>Generative AI - الذكاء الاصطناعي التوليدي</li><li>Classification - التصنيف</li><li>Training Data - بيانات التدريب</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">برنامج يطبق قاعدة ثابتة: إذا تحقق شرط محدد فنفذ إجراء محدد.</span>
+            <ol class="q-options" type="a"><li>Deep Learning - التعلم العميق</li><li>Hallucination - الهلوسة</li><li>Narrow AI - الذكاء الضيق</li><li>Explicit Programming - البرمجة الصريحة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي علاقة تعليمية مبسطة هي الأقرب لما ورد في الدرس؟</span>
+            <ol class="q-options" type="a"><li>AI مجال أوسع، ML جزء منه، وDL أسلوب داخل ML، وكثير من GenAI الحديثة يعتمد على DL</li><li>ML أوسع من AI، وDL خارج ML</li><li>GenAI لا يعتمد على أي تعلم</li><li>كلها أسماء لشيء واحد</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">نموذج لم ير أثناء التدريب إلا حالات قليلة جدًا لمرض نادر. ما التوقع الأكثر مسؤولية؟</span>
+            <ol class="q-options" type="a"><li>سيكون دقيقًا دائمًا</li><li>قد يضعف أداؤه ويحتاج بيانات أو تحققًا إضافيًا</li><li>لن تؤثر البيانات في النتيجة</li><li>سيتحول تلقائيًا إلى ذكاء توليدي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">نظام يكتشف الرسائل المزعجة ولا ينشئ محتوى جديدًا. لماذا لا يلزم اعتباره GenAI؟</span>
+            <ol class="q-options" type="a"><li>لأن كل AI توليدي</li><li>لأنه لا يستخدم بيانات</li><li>لأن مهمته تصنيف أنماط لا توليد محتوى جديد</li><li>لأن البريد الإلكتروني خارج الذكاء الاصطناعي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">أي ممارسة تقلل خطر الاعتماد على هلوسة في تقرير مدرسي؟</span>
+            <ol class="q-options" type="a"><li>نسخ الناتج كما هو</li><li>الاعتماد على صياغته الواثقة</li><li>حذف المصادر من التقرير</li><li>مقارنة الادعاءات بمصادر موثوقة مستقلة قبل استخدامها</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">مدرسة تسمح باستخدام GenAI في الواجبات. أي سياسة تحقق فائدة تعليمية أكبر؟</span>
+            <ol class="q-options" type="a"><li>طلب توثيق المصادر وشرح الطالب لما استخدمه ومراجعة المخرجات</li><li>قبول كل ناتج بلا تحقق</li><li>منع الرجوع لأي مصدر آخر</li><li>اعتبار الإجابة الأطول أفضل دائمًا</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين AI وMachine Learning بجملة دقيقة ومثال لكل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح كيف تختلف البرمجة الصريحة عن التعلم الآلي في طريقة الوصول إلى الحل. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">وضح معنى الهلوسة ولماذا لا تكفي جودة صياغة الناتج للحكم على صحة المعلومة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">مزرعة لديها بيانات قليلة عن مرض نادر. حلل سبب ضعف نموذج تعلم عميق محتمل، واقترح خطوتين لتحسين الثقة في النتيجة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">ضع سياسة قصيرة من ثلاث نقاط لاستخدام الذكاء الاصطناعي التوليدي في الدراسة. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 03 -->
+    <div class="section-card" id="quiz-1-3">
+        <h2><span class="icon">📝</span> Quiz 03 • Lesson 1-3: الذكاء الاصطناعي في الحياة اليومية والصناعة</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">منصة تقترح فيديوهات أو منتجات بناءً على تفاعل المستخدم السابق.</span>
+            <ol class="q-options" type="a"><li>Recommendation System - نظام التوصية</li><li>Face Recognition - التعرف على الوجه</li><li>Smart Agriculture - الزراعة الذكية</li><li>Black Box - مشكلة الصندوق الأسود</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">مستخدم يطلب بالصوت ضبط منبه أو معرفة الطقس.</span>
+            <ol class="q-options" type="a"><li>Image Diagnosis - التشخيص بالصور</li><li>Voice Assistant - المساعد الصوتي</li><li>Logistics AI - الخدمات اللوجستية</li><li>Human Review - المراجعة البشرية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">موقع يحول جملة أجنبية إلى لغة المستخدم تلقائيًا.</span>
+            <ol class="q-options" type="a"><li>Predictive Maintenance - الصيانة التنبؤية</li><li>Black Box - مشكلة الصندوق الأسود</li><li>Machine Translation - الترجمة الآلية</li><li>Recommendation System - نظام التوصية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">هاتف يقارن ملامح الوجه لفتح الجهاز.</span>
+            <ol class="q-options" type="a"><li>Smart Agriculture - الزراعة الذكية</li><li>Human Review - المراجعة البشرية</li><li>Voice Assistant - المساعد الصوتي</li><li>Face Recognition - التعرف على الوجه</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">نظام يحلل صورة أشعة ثم يراجع الطبيب النتيجة.</span>
+            <ol class="q-options" type="a"><li>Image Diagnosis - التشخيص بالصور</li><li>Logistics AI - الخدمات اللوجستية</li><li>Recommendation System - نظام التوصية</li><li>Machine Translation - الترجمة الآلية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">مصنع يراقب حساسات آلة للتنبؤ بموعد عطل محتمل.</span>
+            <ol class="q-options" type="a"><li>Black Box - مشكلة الصندوق الأسود</li><li>Predictive Maintenance - الصيانة التنبؤية</li><li>Voice Assistant - المساعد الصوتي</li><li>Face Recognition - التعرف على الوجه</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">كاميرا تلتقط صور نباتات لاكتشاف إصابة مبكرة.</span>
+            <ol class="q-options" type="a"><li>Human Review - المراجعة البشرية</li><li>Machine Translation - الترجمة الآلية</li><li>Smart Agriculture - الزراعة الذكية</li><li>Image Diagnosis - التشخيص بالصور</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">شركة توصيل تختار مسارًا أكثر كفاءة اعتمادًا على بيانات الطرق والطلبات.</span>
+            <ol class="q-options" type="a"><li>Recommendation System - نظام التوصية</li><li>Face Recognition - التعرف على الوجه</li><li>Predictive Maintenance - الصيانة التنبؤية</li><li>Logistics AI - الخدمات اللوجستية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">قرار عالي الأثر لا يستطيع الفريق شرح العوامل التي أدت إليه بوضوح.</span>
+            <ol class="q-options" type="a"><li>Black Box - مشكلة الصندوق الأسود</li><li>Voice Assistant - المساعد الصوتي</li><li>Image Diagnosis - التشخيص بالصور</li><li>Smart Agriculture - الزراعة الذكية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">قرار طبي أو توظيفي مدعوم بالذكاء الاصطناعي يراجعه مختص قبل الاعتماد النهائي.</span>
+            <ol class="q-options" type="a"><li>Machine Translation - الترجمة الآلية</li><li>Human Review - المراجعة البشرية</li><li>Predictive Maintenance - الصيانة التنبؤية</li><li>Logistics AI - الخدمات اللوجستية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي عبارة أدق عن التنبؤ الذي يقدمه AI؟</span>
+            <ol class="q-options" type="a"><li>هو احتمال مبني على أنماط وليس ضمنًا للنتيجة</li><li>هو ضمان كامل لما سيحدث</li><li>لا يعتمد على بيانات سابقة</li><li>يصلح وحده لكل قرار أخلاقي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">بيانات تدريب غير ممثلة لمجموعة من المستخدمين قد تؤدي إلى:</span>
+            <ol class="q-options" type="a"><li>دقة مضمونة</li><li>نتائج ضعيفة أو غير عادلة لهذه المجموعة</li><li>إلغاء الحاجة للمراجعة البشرية</li><li>تحويل النظام تلقائيًا إلى نظام توصية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">أي موقف يحتاج أقوى مستوى من الإشراف البشري؟</span>
+            <ol class="q-options" type="a"><li>اقتراح أغنية</li><li>اقتراح فيديو ترفيهي</li><li>تحليل أشعة قبل قرار علاجي مهم</li><li>ترتيب صور في ألبوم شخصي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">ما الفرق الأوضح بين Black Box وHallucination؟</span>
+            <ol class="q-options" type="a"><li>كلاهما يعنيان الخطأ نفسه</li><li>Black Box يعني نقص البيانات فقط</li><li>Hallucination تعني صعوبة تفسير القرار</li><li>Hallucination ناتج غير صحيح يبدو مقنعًا، Black Box صعوبة تفسير مسار القرار</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">شركة توصيل تجمع بيانات مواقع العملاء لتحسين المسارات. ما الإجراء الأكثر اتساقًا مع الدرس؟</span>
+            <ol class="q-options" type="a"><li>تحديد الحاجة للبيانات وحمايتها مع مراجعة أثر الخصوصية</li><li>جمع كل البيانات الممكنة دون غرض محدد</li><li>تجاهل دقة المسارات</li><li>منع أي إشراف بشري</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين نظام التوصية والصيانة التنبؤية من حيث نوع البيانات والهدف من التنبؤ. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح لماذا تعد جودة البيانات عاملًا حاسمًا في تطبيقات الذكاء الاصطناعي اليومية والصناعية. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">وضح الفرق بين مشكلة الصندوق الأسود والهلوسة مع مثال مختلف لكل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">مستشفى يريد استخدام AI لتحليل الأشعة. حدد ما يمكن أن يقدمه النظام وما الذي يجب أن يبقى تحت قرار الطبيب. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">صمم قاعدة لاتخاذ القرار تحدد متى تكون المراجعة البشرية إلزامية في نظام AI. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 04 -->
+    <div class="section-card" id="quiz-1-4">
+        <h2><span class="icon">📝</span> Quiz 04 • Lesson 1-4: القضايا الأخلاقية للذكاء الاصطناعي</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">نظام توظيف يعطي نتائج مختلفة لمجموعات بسبب بيانات تاريخية غير ممثلة بعدل.</span>
+            <ol class="q-options" type="a"><li>Privacy - الخصوصية</li><li>Black Box - مشكلة الصندوق الأسود</li><li>Algorithmic Bias - التمييز الخوارزمي</li><li>Data Minimization - تقليل البيانات</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">فريق يقارن معدل الأخطاء بين مجموعات المستخدمين قبل اعتماد نظام تصنيف.</span>
+            <ol class="q-options" type="a"><li>Accountability - المساءلة</li><li>Human Oversight - الإشراف البشري</li><li>Purpose Limitation - تحديد الغرض</li><li>Fairness - العدالة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">خدمة توضح للمستخدم أن قرارًا ما مدعوم بالذكاء الاصطناعي وما المعلومات المستخدمة.</span>
+            <ol class="q-options" type="a"><li>Transparency - الشفافية</li><li>Explainability / XAI - قابلية التفسير</li><li>Data Minimization - تقليل البيانات</li><li>Algorithmic Bias - التمييز الخوارزمي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">نظام يجمع فقط البيانات اللازمة ويحميها ولا يعيد استخدامها لغرض غير معلن.</span>
+            <ol class="q-options" type="a"><li>Black Box - مشكلة الصندوق الأسود</li><li>Privacy - الخصوصية</li><li>Purpose Limitation - تحديد الغرض</li><li>Fairness - العدالة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">مؤسسة تحدد من يراجع خطأ النظام ومن يملك صلاحية إيقافه أو تصحيحه.</span>
+            <ol class="q-options" type="a"><li>Human Oversight - الإشراف البشري</li><li>Algorithmic Bias - التمييز الخوارزمي</li><li>Accountability - المساءلة</li><li>Transparency - الشفافية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">أداة تشرح أهم العوامل التي أثرت في توصية عالية الأثر.</span>
+            <ol class="q-options" type="a"><li>Data Minimization - تقليل البيانات</li><li>Fairness - العدالة</li><li>Privacy - الخصوصية</li><li>Explainability / XAI - قابلية التفسير</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">نظام يعطي قرارًا مهمًا دون قدرة كافية على تفسير سبب النتيجة.</span>
+            <ol class="q-options" type="a"><li>Black Box - مشكلة الصندوق الأسود</li><li>Purpose Limitation - تحديد الغرض</li><li>Transparency - الشفافية</li><li>Accountability - المساءلة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">موظف مختص يراجع قرار رفض طلب قبل أن يصبح نهائيًا.</span>
+            <ol class="q-options" type="a"><li>Algorithmic Bias - التمييز الخوارزمي</li><li>Human Oversight - الإشراف البشري</li><li>Privacy - الخصوصية</li><li>Explainability / XAI - قابلية التفسير</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">تطبيق يتوقف عن طلب معلومات شخصية لا يحتاجها لأداء وظيفته.</span>
+            <ol class="q-options" type="a"><li>Fairness - العدالة</li><li>Accountability - المساءلة</li><li>Data Minimization - تقليل البيانات</li><li>Black Box - مشكلة الصندوق الأسود</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">بيانات جمعت لخدمة مدرسية لا تستخدم لاحقًا في غرض آخر غير معلن دون أساس مناسب.</span>
+            <ol class="q-options" type="a"><li>Transparency - الشفافية</li><li>Explainability / XAI - قابلية التفسير</li><li>Human Oversight - الإشراف البشري</li><li>Purpose Limitation - تحديد الغرض</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي سبب لا يعد تفسيرًا مناسبًا للتحيز الخوارزمي وفق الدرس؟</span>
+            <ol class="q-options" type="a"><li>بيانات تدريب متحيزة</li><li>نقص تمثيل مجموعة معينة</li><li>تصميم أو استخدام منحاز</li><li>بطء سرعة المعالج وحده</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">نظام دقيق إحصائيًا لكنه لا يوضح استخدام البيانات ولا توجد جهة تراجع الأخطاء. أي حكم أدق؟</span>
+            <ol class="q-options" type="a"><li>الدقة وحدها تكفي للأخلاق</li><li>ما زالت هناك مشكلات شفافية ومساءلة</li><li>لا توجد أي مشكلة ما دام سريعًا</li><li>الخصوصية لا علاقة لها بالنظام</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">عند استخدام التعرف على الوجه في مكان عام، أي قضيتين تستحقان فحصًا مباشرًا؟</span>
+            <ol class="q-options" type="a"><li>حجم الشاشة وسرعة الطباعة</li><li>قانون مور والحوسبة الكمومية</li><li>الخصوصية والعدالة بين المجموعات</li><li>الواقع الافتراضي والتجارة الإلكترونية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">قرار AI عالي الأثر يصعب تفسيره. ما الإجراء الأقوى؟</span>
+            <ol class="q-options" type="a"><li>زيادة قابلية التفسير والمراجعة البشرية قبل الاعتماد</li><li>إخفاء تفاصيل النظام</li><li>الاعتماد على النتيجة وحدها</li><li>جمع بيانات أكثر بلا هدف</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">أي تصميم أكثر مسؤولية لنظام يستخدم بيانات شخصية؟</span>
+            <ol class="q-options" type="a"><li>جمع كل ما يمكن جمعه للاحتياط</li><li>عدم تحديد مسؤول عن النتائج</li><li>تحديد الغرض وتقليل البيانات وحمايتها وتوفير مسار مراجعة</li><li>إلغاء الشفافية حتى لا يربك المستخدم</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">اشرح الفرق بين العدالة والشفافية، مع مثال يوضح أن تحقيق أحدهما لا يضمن الآخر. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">وضح معنى المساءلة في نظام AI ولماذا يجب تحديد جهة تستطيع المراجعة والتصحيح. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">اشرح فائدة قابلية التفسير XAI عندما يكون القرار عالي الأثر. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">نظام توظيف يحقق دقة عامة جيدة لكنه يخطئ أكثر مع مجموعة معينة. حلل مصادر المشكلة المحتملة واقترح اختبارًا عمليًا للعدالة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">صمم قائمة فحص أخلاقية من أربع نقاط قبل إطلاق نظام يستخدم بيانات شخصية. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 05 -->
+    <div class="section-card" id="quiz-2-1">
+        <h2><span class="icon">📝</span> Quiz 05 • Lesson 2-1: تقنيات التشفير والمصادقة</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">متصفح يرسل نموذج تسجيل عبر قناة ويب آمنة ويحمي البيانات أثناء الانتقال.</span>
+            <ol class="q-options" type="a"><li>HTTPS</li><li>Public-key Encryption</li><li>2FA</li><li>Digital Signature</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">المتصفح والخادم يبدآن مصافحة قبل تبادل بيانات الجلسة.</span>
+            <ol class="q-options" type="a"><li>Symmetric Encryption</li><li>TLS</li><li>MFA</li><li>Non-repudiation</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">المتصفح يتحقق من صلاحية الشهادة وسلسلة الثقة واسم النطاق.</span>
+            <ol class="q-options" type="a"><li>Authentication</li><li>Digital Signature</li><li>Digital Certificate</li><li>HTTPS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">مرحلة من إنشاء اتصال آمن تستخدم مفتاحًا عامًا وخاصًا بدل مفتاح مشترك واحد.</span>
+            <ol class="q-options" type="a"><li>2FA</li><li>Non-repudiation</li><li>TLS</li><li>Public-key Encryption</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">بعد إنشاء جلسة TLS تُحمى كمية كبيرة من البيانات بكفاءة بمفتاح مشترك.</span>
+            <ol class="q-options" type="a"><li>Symmetric Encryption</li><li>MFA</li><li>HTTPS</li><li>Digital Certificate</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">خدمة تتحقق من هوية صاحب الحساب عند تسجيل الدخول.</span>
+            <ol class="q-options" type="a"><li>Digital Signature</li><li>Authentication</li><li>TLS</li><li>Public-key Encryption</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">كلمة مرور مع رمز على جهاز يملكه المستخدم.</span>
+            <ol class="q-options" type="a"><li>Non-repudiation</li><li>Digital Certificate</li><li>2FA</li><li>Symmetric Encryption</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">كلمة مرور مع هاتف وبصمة في عملية تحقق واحدة.</span>
+            <ol class="q-options" type="a"><li>HTTPS</li><li>Public-key Encryption</li><li>Authentication</li><li>MFA</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">مستند رقمي يحتاج إثبات هوية من وقعه وأن المحتوى لم يتغير.</span>
+            <ol class="q-options" type="a"><li>Digital Signature</li><li>TLS</li><li>Symmetric Encryption</li><li>2FA</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">معاملة تحتاج دليلًا على أن جهة محددة وقعت مستندًا رقميًا.</span>
+            <ol class="q-options" type="a"><li>Digital Certificate</li><li>Non-repudiation</li><li>Authentication</li><li>MFA</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">في اتصال HTTPS، لماذا لا نستخدم التشفير بالمفتاح العام وحده لكل بيانات الجلسة؟</span>
+            <ol class="q-options" type="a"><li>لأن TLS لا يستخدم مفاتيح</li><li>لأن التشفير المتماثل أسرع لحجم كبير من بيانات الجلسة</li><li>لأن الشهادة تشفر كل البيانات وحدها</li><li>لأن HTTPS لا يحتاج سرية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">أي فحص يرتبط مباشرة بالتحقق من شهادة موقع ويب؟</span>
+            <ol class="q-options" type="a"><li>عدد الزيارات</li><li>سرعة المعالج</li><li>صلاحية الشهادة وسلسلة الثقة واسم النطاق</li><li>حجم صفحة الموقع</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">أي مثال يحقق معنى 2FA بصورة أدق؟</span>
+            <ol class="q-options" type="a"><li>كلمتا مرور مختلفتان فقط</li><li>رمز يصل إلى البريد نفسه</li><li>كلمة مرور + سؤال سري</li><li>كلمة مرور + رمز من جهاز يملكه المستخدم</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">ما الفرق الأدق بين التوقيع الرقمي وتشفير بيانات الجلسة؟</span>
+            <ol class="q-options" type="a"><li>كلاهما يؤدي الوظيفة نفسها تمامًا</li><li>التوقيع يدعم السلامة وهوية الموقع، بينما تشفير الجلسة يركز على حماية البيانات أثناء النقل</li><li>التوقيع يستخدم لتغيير شكل الموقع</li><li>التشفير المتماثل يثبت هوية الموقع وحده</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">إذا سرقت كلمة مرور مستخدم، أي إجراء يقلل خطر الدخول غير المصرح به مباشرة؟</span>
+            <ol class="q-options" type="a"><li>إلغاء TLS</li><li>إضافة عامل مستقل عبر MFA</li><li>حذف الشهادة الرقمية</li><li>استخدام كلمة مرور ثانية من الفئة نفسها فقط</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين الشهادة الرقمية والمصادقة من حيث ما الذي يتم التحقق منه في كل حالة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح لماذا يجمع TLS بين آليات التحقق/الاتفاق الآمن ومفتاح متماثل لحماية بيانات الجلسة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">قارن بين 2FA وMFA، واذكر مثالًا لعوامل من فئات مختلفة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">مؤسسة تريد حماية بوابة دخول حساسة. صمم مسار تحقق يجمع بين HTTPS وشهادة موثوقة ومصادقة متعددة العوامل. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">حلل موقف مستند رقمي مهم يحتاج ضمان سلامة المحتوى وهوية الموقّع وإمكان إثبات التوقيع لاحقًا. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 06 -->
+    <div class="section-card" id="quiz-2-2">
+        <h2><span class="icon">📝</span> Quiz 06 • Lesson 2-2: تصميم أمن الشبكات</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">بوابة الشبكة تسمح بخدمة محددة وتمنع اتصالات أخرى وفق سياسة.</span>
+            <ol class="q-options" type="a"><li>Endpoint Security</li><li>Security Perimeter</li><li>Firewall</li><li>Remote Access</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">موظف يعمل من المنزل ويتصل بشبكة المؤسسة عبر قناة محمية.</span>
+            <ol class="q-options" type="a"><li>Defense in Depth</li><li>Authorization</li><li>Network Segmentation</li><li>VPN</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">خادم ويب عام يوضح في منطقة منفصلة حتى لا يصل مباشرة إلى قواعد البيانات الداخلية.</span>
+            <ol class="q-options" type="a"><li>DMZ</li><li>Zero Trust</li><li>Remote Access</li><li>Firewall</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">حاسب موظف يُحدث دوريًا ويُفحص بحثًا عن البرمجيات الخبيثة.</span>
+            <ol class="q-options" type="a"><li>Security Perimeter</li><li>Endpoint Security</li><li>Network Segmentation</li><li>VPN</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">Firewall + VPN + DMZ + Endpoint Security تعمل معًا بدل الاعتماد على طبقة واحدة.</span>
+            <ol class="q-options" type="a"><li>Authorization</li><li>Firewall</li><li>Defense in Depth</li><li>DMZ</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">مستخدم داخل شبكة المؤسسة ما زال يخضع للتحقق قبل الوصول إلى مورد حساس.</span>
+            <ol class="q-options" type="a"><li>Remote Access</li><li>VPN</li><li>Endpoint Security</li><li>Zero Trust</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">جدار حماية على بوابة الشبكة يمثل نقطة تحكم بين مناطق مختلفة.</span>
+            <ol class="q-options" type="a"><li>Security Perimeter</li><li>Network Segmentation</li><li>DMZ</li><li>Defense in Depth</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">المعلم يصل إلى الموارد التي يحتاجها دون صلاحيات إدارية زائدة.</span>
+            <ol class="q-options" type="a"><li>Firewall</li><li>Authorization</li><li>Endpoint Security</li><li>Zero Trust</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">موظف من المنزل يدخل إلى أنظمة داخلية وفق سياسة وصول آمن.</span>
+            <ol class="q-options" type="a"><li>VPN</li><li>Defense in Depth</li><li>Remote Access</li><li>Security Perimeter</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">اختراق خادم عام لا يمنح المهاجم مسارًا مباشرًا إلى كل قواعد البيانات الداخلية.</span>
+            <ol class="q-options" type="a"><li>DMZ</li><li>Zero Trust</li><li>Authorization</li><li>Network Segmentation</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي تصميم يطبق Defense in Depth بصورة أفضل؟</span>
+            <ol class="q-options" type="a"><li>Firewall فقط</li><li>VPN فقط</li><li>طبقات تشمل DMZ وأمن طرفي والتحقق من الوصول</li><li>كلمة مرور واحدة لكل المستخدمين</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">لماذا لا يعتبر موقع الجهاز داخل شبكة المؤسسة سببًا كافيًا للثقة في Zero Trust؟</span>
+            <ol class="q-options" type="a"><li>لأن الجهاز الداخلي لا يمكن أن يُخترق</li><li>لأن كل وصول يجب تقييم الهوية والجهاز والسياق والصلاحية</li><li>لأن VPN يلغي الحاجة للتحقق</li><li>لأن DMZ داخلية دائمًا</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">خادم عام يجب أن يكون متاحًا من الإنترنت دون كشف الشبكة الداخلية مباشرة. أين يوضع؟</span>
+            <ol class="q-options" type="a"><li>داخل قاعدة البيانات</li><li>على جهاز موظف</li><li>في VPN</li><li>في DMZ مع ضوابط مناسبة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">مهاجم تجاوز طبقة واحدة عبر جهاز داخلي مصاب. ما الذي يقلل أثر ذلك؟</span>
+            <ol class="q-options" type="a"><li>وجود طبقات وعزل وصلاحيات متعددة تقلل الانتشار</li><li>إلغاء تحديث الأجهزة</li><li>منح كل المستخدمين صلاحيات واسعة</li><li>إزالة جدار الحماية</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">أي زوج يصف وظيفتين مختلفتين بدقة؟</span>
+            <ol class="q-options" type="a"><li>Firewall ينشئ موقعًا، VPN يخزن البيانات</li><li>Firewall يطبق قواعد على حركة الشبكة، VPN يحمي قناة اتصال عبر شبكة عامة</li><li>DMZ تعني مصادقة، Zero Trust يعني تشفيرًا متماثلًا</li><li>Endpoint Security يساوي البريد الإلكتروني، AR يساوي Authorization</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين Firewall وVPN من حيث الوظيفة والموقف المناسب لكل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح لماذا توضع الخدمات العامة في DMZ بدل الاتصال المباشر بالشبكة الداخلية الحساسة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">وضح كيف يجمع Zero Trust بين التحقق من الهوية والجهاز والسياق والصلاحيات. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">صمم حماية لموظف يعمل عن بعد يصل إلى نظام داخلي حساس مستخدمًا VPN وأمن الأجهزة الطرفية والتحقق من الصلاحيات. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">مهاجم سيطر على جهاز داخلي موثوق سابقًا. حلل كيف تقلل مبادئ Zero Trust وDefense in Depth وتقسيم الشبكة من قدرته على الانتشار. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 07 -->
+    <div class="section-card" id="quiz-2-3">
+        <h2><span class="icon">📝</span> Quiz 07 • Lesson 2-3: الاستجابة للحوادث وإدارة المخاطر</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">تسريب بيانات أو تعديلها أو توقف خدمة بسبب نشاط أمني غير مشروع.</span>
+            <ol class="q-options" type="a"><li>Security Incident</li><li>Containment</li><li>Lessons Learned</li><li>Likelihood</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">المؤسسة تحدد فريق الاستجابة وخطة الاتصال والنسخ الاحتياطية مسبقًا.</span>
+            <ol class="q-options" type="a"><li>Eradication</li><li>Preparation</li><li>Risk</li><li>Impact</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">نظام مراقبة يرصد نشاطًا غير معتاد ويبدأ الفريق في التحقق منه.</span>
+            <ol class="q-options" type="a"><li>Recovery</li><li>Likelihood</li><li>Detection</li><li>Security Incident</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">عزل جهاز مصاب عن الشبكة فورًا لمنع الانتشار.</span>
+            <ol class="q-options" type="a"><li>Lessons Learned</li><li>Impact</li><li>Preparation</li><li>Containment</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">حذف البرمجية الضارة وإغلاق نقطة الدخول أو إصلاح الثغرة.</span>
+            <ol class="q-options" type="a"><li>Eradication</li><li>Risk</li><li>Security Incident</li><li>Detection</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">استرجاع خدمة من نسخة سليمة ثم مراقبتها بعد العودة.</span>
+            <ol class="q-options" type="a"><li>Likelihood</li><li>Recovery</li><li>Preparation</li><li>Containment</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">تحديث سياسة أو تدريب الفريق بعد انتهاء الحادث.</span>
+            <ol class="q-options" type="a"><li>Impact</li><li>Detection</li><li>Lessons Learned</li><li>Eradication</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">ثغرة يمكن استغلالها وقد تسبب خسارة للمؤسسة.</span>
+            <ol class="q-options" type="a"><li>Security Incident</li><li>Containment</li><li>Recovery</li><li>Risk</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">تصنيف فرصة وقوع الخطر بأنها عالية أو متوسطة أو منخفضة.</span>
+            <ol class="q-options" type="a"><li>Likelihood</li><li>Preparation</li><li>Eradication</li><li>Lessons Learned</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">التمييز بين فقد خدمة بسيطة وتسريب بيانات شديدة الحساسية.</span>
+            <ol class="q-options" type="a"><li>Detection</li><li>Impact</li><li>Recovery</li><li>Risk</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي ترتيب هو الأقرب للمراحل الست المبسطة للاستجابة للحوادث؟</span>
+            <ol class="q-options" type="a"><li>تحضير - اكتشاف - احتواء - استئصال - استعادة - دروس مستفادة</li><li>اكتشاف - تحضير - استعادة - احتواء - دروس مستفادة - استئصال</li><li>احتواء - استعادة - تحضير - اكتشاف - استئصال - دروس مستفادة</li><li>تحضير - استئصال - اكتشاف - استعادة - دروس مستفادة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">ما الفرق بين الاحتواء والاستئصال؟</span>
+            <ol class="q-options" type="a"><li>الاحتواء يعيد الخدمة والاستئصال يكتشف الحادث</li><li>الاحتواء يحد الانتشار بسرعة، والاستئصال يزيل السبب بعد السيطرة عليه</li><li>كلاهما يعنيان النسخ الاحتياطي</li><li>الاستئصال يسبق الاكتشاف دائمًا</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">في تبسيط الدرس، على أي عنصرين تعتمد أولوية المخاطر؟</span>
+            <ol class="q-options" type="a"><li>سرعة الشبكة وحجم الشاشة</li><li>عدد الموظفين فقط</li><li>الأثر والاحتمالية</li><li>نوع المتصفح ونظام التشغيل</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">أثناء الاستعادة ظهر أن البرمجية الضارة ما زالت موجودة. ما التصرف الأنسب؟</span>
+            <ol class="q-options" type="a"><li>الاستمرار دون تعديل</li><li>إنهاء الحادث فورًا</li><li>الانتقال مباشرة للدروس المستفادة</li><li>العودة إلى مرحلة مناسبة مثل الاحتواء أو الاستئصال قبل استكمال الاستعادة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">خطر احتمال حدوثه مرتفع وتأثيره مرتفع مقارنة بخطر منخفض الاحتمال وضعيف الأثر. أيهما يأخذ أولوية أكبر عادة؟</span>
+            <ol class="q-options" type="a"><li>الأول</li><li>الثاني</li><li>متساويان دائمًا</li><li>لا يمكن استخدام الأثر والاحتمال في الترتيب</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">اشرح الفرق بين الاحتواء والاستئصال والاستعادة، مع مثال قصير لكل مرحلة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">وضح كيف تساعد الدروس المستفادة في تقليل تكرار الحوادث المستقبلية. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">اشرح معنى الأثر والاحتمالية وكيف يستخدمان في ترتيب المخاطر. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">شركة اكتشفت هجوم فدية على عدة أجهزة. رتب أول أربع خطوات عملية وفق مراحل الاستجابة وفسر هدف كل خطوة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">لديك خطران: الأول احتمال مرتفع وتأثير متوسط، والثاني احتمال منخفض وتأثير كارثي. وضح ما المعلومات الإضافية التي تحتاجها قبل تحديد الأولوية. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 08 -->
+    <div class="section-card" id="quiz-3-1">
+        <h2><span class="icon">📝</span> Quiz 08 • Lesson 3-1: البنية العامة لتطبيقات الويب</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">منصة حجز أو متجر يقدم تفاعلًا للمستخدم عبر الويب.</span>
+            <ol class="q-options" type="a"><li>Data Layer</li><li>Response</li><li>Web Application</li><li>Three-layer Model</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">زر البحث ونموذج التسجيل وصفحة النتائج.</span>
+            <ol class="q-options" type="a"><li>Database</li><li>Business Logic</li><li>Server-side Processing</li><li>Frontend</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">التحقق من تسجيل الدخول أو حساب السعر والخصم.</span>
+            <ol class="q-options" type="a"><li>Backend</li><li>Request</li><li>Three-layer Model</li><li>Web Application</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">استرجاع بيانات المنتجات والمستخدمين لطلب معين.</span>
+            <ol class="q-options" type="a"><li>Response</li><li>Data Layer</li><li>Server-side Processing</li><li>Frontend</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">جداول المنتجات والحسابات التي يمكن البحث فيها وتحديثها.</span>
+            <ol class="q-options" type="a"><li>Business Logic</li><li>Web Application</li><li>Database</li><li>Backend</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">المستخدم يكتب كلمة بحث فتُرسل للخادم لمعالجتها.</span>
+            <ol class="q-options" type="a"><li>Three-layer Model</li><li>Frontend</li><li>Data Layer</li><li>Request</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">الخادم يعيد قائمة نتائج البحث لتظهر في الواجهة.</span>
+            <ol class="q-options" type="a"><li>Response</li><li>Server-side Processing</li><li>Backend</li><li>Database</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">قواعد الخصم أو شروط صلاحية الحجز.</span>
+            <ol class="q-options" type="a"><li>Web Application</li><li>Business Logic</li><li>Data Layer</li><li>Request</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">فريق يوزع العرض والمعالجة والتخزين على ثلاث مسؤوليات مترابطة.</span>
+            <ol class="q-options" type="a"><li>Frontend</li><li>Database</li><li>Three-layer Model</li><li>Response</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">التحقق من توافر موعد وحساب السعر قبل إرسال الاستجابة للمستخدم.</span>
+            <ol class="q-options" type="a"><li>Backend</li><li>Request</li><li>Business Logic</li><li>Server-side Processing</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">مستخدم يضغط زر البحث. أي تسلسل مبسط هو الأدق؟</span>
+            <ol class="q-options" type="a"><li>Frontend يجمع الطلب - Backend يعالجه - Data Layer تسترجع البيانات - النتيجة تعود للواجهة</li><li>Data Layer تعرض الزر مباشرة دون خادم</li><li>Backend لا يتعامل مع البيانات</li><li>Frontend يخزن كل البيانات دائمًا</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">أي مهمة يجب أن تكون أقرب إلى Backend؟</span>
+            <ol class="q-options" type="a"><li>تحديد لون الزر</li><li>رسم أيقونة</li><li>التحقق من صلاحية الحجز وتطبيق قواعده</li><li>عرض عنوان الصفحة فقط</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">أي عبارة أدق عن نموذج الطبقات الثلاث؟</span>
+            <ol class="q-options" type="a"><li>هو وصف تعليمي للمسؤوليات وليس شرطًا أن يطابق كل تطبيق حرفيًا</li><li>كل تطبيق حقيقي يجب أن يكون ثلاثة أجهزة منفصلة</li><li>Data Layer هي الشاشة</li><li>Frontend ينفذ كل قواعد العمل الحساسة وحده</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">واجهة متجر تظهر للمستخدم لكن المنتجات لا تصل. أي طبقتين يجب فحصهما أولًا بعد التأكد أن الواجهة أرسلت الطلب؟</span>
+            <ol class="q-options" type="a"><li>CSS والصياغة</li><li>Backend وData Layer</li><li>لوحة المفاتيح فقط</li><li>الغلاف والشعار</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">لماذا لا يُفضل وضع كل منطق التطبيق في Frontend؟</span>
+            <ol class="q-options" type="a"><li>لأن الواجهة لا تعرض محتوى</li><li>لأن فصل المسؤوليات يجعل المعالجة والقواعد والبيانات أوضح وأكثر قابلية للإدارة</li><li>لأن Backend لا يعالج طلبات</li><li>لأن Data Layer لا تخزن شيئًا</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين Frontend وBackend من حيث ما يراه المستخدم ونوع المسؤوليات التي ينفذها كل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح دور Data Layer ولماذا لا تعني فقط قاعدة بيانات واحدة في كل تطبيق. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">تتبع رحلة طلب بحث من لحظة إدخال المستخدم للكلمة حتى ظهور النتائج في الواجهة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">صمم توزيع مهام لتطبيق حجز مواعيد باستخدام Frontend وBackend وData Layer، ووضح أين يجب التحقق من المواعيد ولماذا. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">متجر يعرض الواجهة بصورة طبيعية لكن لا يجد المنتجات. ضع خطة تشخيص عبر الطبقات الثلاث وحدد دليلًا واحدًا تحتاجه في كل طبقة. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 09 -->
+    <div class="section-card" id="quiz-3-2">
+        <h2><span class="icon">📝</span> Quiz 09 • Lesson 3-2: طرق الاتصال في تطبيقات الويب</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">متصفح يطلب صفحة أو يرسل نموذجًا إلى خادم.</span>
+            <ol class="q-options" type="a"><li>Client</li><li>HTTPS</li><li>200</li><li>500</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">خادم موقع ويب يستقبل طلب بحث ويرجع النتيجة.</span>
+            <ol class="q-options" type="a"><li>GET</li><li>Server</li><li>404</li><li>JSON API</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">متصفح وخادم يتبادلان طلبات واستجابات ويب وفق قواعد مشتركة.</span>
+            <ol class="q-options" type="a"><li>POST</li><li>500</li><li>HTTP</li><li>Client</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">إرسال نموذج تسجيل عبر قناة ويب آمنة.</span>
+            <ol class="q-options" type="a"><li>200</li><li>JSON API</li><li>Server</li><li>HTTPS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">طلب قائمة منتجات أو تفاصيل عنصر من الخادم.</span>
+            <ol class="q-options" type="a"><li>GET</li><li>404</li><li>Client</li><li>HTTP</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">إرسال نموذج تسجيل أو بيانات جديدة للمعالجة.</span>
+            <ol class="q-options" type="a"><li>500</li><li>POST</li><li>Server</li><li>HTTPS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">الخادم يعيد استجابة ناجحة بعد تنفيذ الطلب.</span>
+            <ol class="q-options" type="a"><li>JSON API</li><li>HTTP</li><li>200</li><li>GET</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">المستخدم يطلب رابطًا لصفحة غير موجودة على الموقع.</span>
+            <ol class="q-options" type="a"><li>HTTPS</li><li>Client</li><li>POST</li><li>404</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">الخادم يواجه مشكلة داخلية أثناء تنفيذ الطلب.</span>
+            <ol class="q-options" type="a"><li>500</li><li>Server</li><li>GET</li><li>200</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">تطبيق طقس يطلب بيانات عبر API ويستقبلها في صورة JSON.</span>
+            <ol class="q-options" type="a"><li>HTTP</li><li>JSON API</li><li>POST</li><li>404</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي تسلسل مبسط لرحلة اتصال ويب هو الأدق؟</span>
+            <ol class="q-options" type="a"><li>Client يرسل Request → HTTP/HTTPS ينقل → Server يعالج → Response</li><li>Server يرسل إلى نفسه دون عميل</li><li>JSON يصل مثل الخادم</li><li>404 يعني نجاح الطلب</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">ما العبارة الأدق عن HTTPS؟</span>
+            <ol class="q-options" type="a"><li>يغير معنى GET إلى POST</li><li>يلغي رموز الحالة</li><li>يحمي قناة الاتصال ولا يغير الغرض الأساسي لطرق GET وPOST</li><li>JSON هو صيغة بيانات مثل HTTPS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">طلب مورد غير موجود على الموقع أعاد 404. ما الاستنتاج الصحيح؟</span>
+            <ol class="q-options" type="a"><li>الإنترنت كله متوقف</li><li>المورد المطلوب غير موجود في هذا السياق</li><li>الطلب نجح بالكامل</li><li>الخطأ دائمًا في جهاز العميل</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">API أعادت بيانات طقس بصيغة JSON. أي وصف أدق؟</span>
+            <ol class="q-options" type="a"><li>API هو واجهة الطلب وJSON هي شكل النص</li><li>كلاهما بروتوكول تشفير</li><li>JSON وAPI يؤديان الوظيفة نفسها</li><li>API تحدد طريقة التبادل وJSON تمثل البيانات المنظمة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">أي سيناريو أنسب لاستخدام POST بدل GET عادة؟</span>
+            <ol class="q-options" type="a"><li>إرسال بيانات نموذج تسجيل للمعالجة</li><li>طلب عرض قائمة عامة من المنتجات</li><li>طلب صورة موجودة</li><li>قراءة تفاصيل خبر</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين Client وServer ضمن نموذج الطلب والاستجابة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح الفرق بين GET وPOST من حيث الغرض المعتاد، مع مثال لكل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">وضح الفرق بين 404 و500 ولماذا لا يعني أي منهما أن الإنترنت كله متوقف. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">تتبع رحلة نموذج تسجيل عبر HTTPS من العميل إلى الخادم ثم عودة الاستجابة ووضح أين يظهر دور رمز الحالة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">صمم تبادل بيانات بين تطبيق هاتف وخدمة طقس يوضح دور JSON وAPI وفرق الطلب عن الاستجابة HTTP/HTTPS. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 10 -->
+    <div class="section-card" id="quiz-3-3">
+        <h2><span class="icon">📝</span> Quiz 10 • Lesson 3-3: أساسيات تكنولوجيا الواجهة الأمامية</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">صفحة تحتاج عنوانًا وفقرة وقائمة ونموذجًا منظمًا.</span>
+            <ol class="q-options" type="a"><li>Semantic HTML</li><li>Accessibility</li><li>HTML</li><li>React / Vue</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">مصمم يضبط حجم الخط والمسافات وشكل الزر وتخطيط الصفحة.</span>
+            <ol class="q-options" type="a"><li>Responsive Design</li><li>SEO</li><li>Next.js</li><li>CSS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">زر يفتح قائمة أو نموذج يتحقق من إدخال المستخدم عند التفاعل.</span>
+            <ol class="q-options" type="a"><li>JavaScript</li><li>Mobile First</li><li>React / Vue</li><li>HTML</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">بنية صفحة واضحة تساعد قارئ الشاشة ومحرك البحث على فهم الأقسام.</span>
+            <ol class="q-options" type="a"><li>Accessibility</li><li>Semantic HTML</li><li>Next.js</li><li>CSS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">شبكة أعمدة تتحول إلى تخطيط مناسب للهاتف.</span>
+            <ol class="q-options" type="a"><li>SEO</li><li>HTML</li><li>Responsive Design</li><li>JavaScript</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">الفريق يصمم تجربة الهاتف أولًا ثم يضيف تخطيطات أوسع.</span>
+            <ol class="q-options" type="a"><li>CSS</li><li>React / Vue</li><li>Semantic HTML</li><li>Mobile First</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">تسميات واضحة وتباين مناسب ودعم لوحة المفاتيح وقارئ الشاشة.</span>
+            <ol class="q-options" type="a"><li>Accessibility</li><li>Next.js</li><li>JavaScript</li><li>Responsive Design</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">عناوين وبنية واضحة ومحتوى منظم يسهل على محركات البحث فهمه.</span>
+            <ol class="q-options" type="a"><li>HTML</li><li>SEO</li><li>Semantic HTML</li><li>Mobile First</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">فريق يستخدم أدوات حديثة لبناء مكونات واجهة قابلة لإعادة الاستخدام.</span>
+            <ol class="q-options" type="a"><li>CSS</li><li>Responsive Design</li><li>React / Vue</li><li>Accessibility</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">مشروع يستخدم إطارًا حديثًا لتنظيم واجهة وتطبيق ويب بدل بناء كل شيء يدويًا من الصفر.</span>
+            <ol class="q-options" type="a"><li>JavaScript</li><li>Mobile First</li><li>SEO</li><li>Next.js</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي تقسيم للأدوار هو الأدق؟</span>
+            <ol class="q-options" type="a"><li>HTML للبنية، CSS للمظهر، JavaScript للسلوك والتفاعل</li><li>CSS للطباعة، HTML للتشفير، JavaScript للبيانات</li><li>HTML للسلوك فقط</li><li>JavaScript للبنية الثابتة فقط</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">صفحة تعمل جيدًا على الحاسب لكنها تنهار على الهاتف. ما المفهوم الأوضح الذي يحتاج تحسينًا؟</span>
+            <ol class="q-options" type="a"><li>SEO</li><li>التوقيع الرقمي</li><li>Responsive Design</li><li>DMZ</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">لماذا يفيد Semantic HTML إمكانية الوصول؟</span>
+            <ol class="q-options" type="a"><li>لأنه يغير ألوان الصفحة تلقائيًا</li><li>لأنه يمنح عناصر الصفحة معنى أوضح يمكن لقارئ الشاشة فهمه</li><li>لأنه يلغي CSS</li><li>لأنه يحول الموقع إلى تطبيق سطح مكتب</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">أي قرار يتوافق مع Accessibility بصورة أفضل؟</span>
+            <ol class="q-options" type="a"><li>الاعتماد على اللون وحده لإظهار الخطأ</li><li>إزالة تسميات الحقول</li><li>منع استخدام لوحة المفاتيح</li><li>استخدام تسميات واضحة وتباين مناسب ودعم التفاعل بطرق مختلفة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">أي عبارة أدق عن أدوات مثل Next.js وVue وReact في سياق الدرس؟</span>
+            <ol class="q-options" type="a"><li>تساعد المطور على تنظيم وبناء واجهات وتطبيقات حديثة لكنها لا تلغي أساسيات HTML/CSS/JavaScript</li><li>هي بديل للتفكير في المستخدم</li><li>تستخدم بدل الإنترنت</li><li>هي رموز حالة HTTP</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين أدوار HTML وCSS وJavaScript في صفحة ويب واحدة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح كيف يساعد Semantic HTML كلا من إمكانية الوصول وفهم بنية الصفحة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">وضح الفرق بين Responsive Design وMobile First، مع مثال تصميمي. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">واجهة جميلة بصريًا لكنها لا تعمل جيدًا بلوحة المفاتيح وقارئ الشاشة. حلل المشكلة واقترح تحسينين. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">صمم خطة واجهة لصفحة تسجيل تعمل على الهاتف والحاسب، وتوضح قراراتك في HTML الدلالي وCSS المتجاوب وإمكانية الوصول. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 11 -->
+    <div class="section-card" id="quiz-4-1">
+        <h2><span class="icon">📝</span> Quiz 11 • Lesson 4-1: أنواع الوسائط وخصائصها</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">حملة جماهيرية تحتاج صوتًا وفيديو وانتشارًا واسعًا في وقت متقارب.</span>
+            <ol class="q-options" type="a"><li>Television</li><li>Website</li><li>Wide Reach</li><li>Interaction</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">برنامج صوتي يصل للمستمعين أثناء السفر دون عناصر بصرية.</span>
+            <ol class="q-options" type="a"><li>Social Media</li><li>Radio</li><li>Depth &amp; Detail</li><li>Media Mix</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">قارئ يحتفظ بالمادة المطبوعة ويرجع إلى تفاصيلها دون اتصال شبكي.</span>
+            <ol class="q-options" type="a"><li>Email</li><li>Interaction</li><li>Newspaper</li><li>Television</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">مؤسسة تنشر تفاصيل متجددة وخدمات ونماذج في مكان واحد.</span>
+            <ol class="q-options" type="a"><li>Wide Reach</li><li>Media Mix</li><li>Radio</li><li>Website</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">حملة تنشر منشورًا يمكن للمستخدمين مشاركته والتعليق عليه سريعًا.</span>
+            <ol class="q-options" type="a"><li>Social Media</li><li>Depth &amp; Detail</li><li>Television</li><li>Newspaper</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">مؤسسة ترسل إعلانًا أو نشرة إلى قائمة مشتركين محددة.</span>
+            <ol class="q-options" type="a"><li>Interaction</li><li>Email</li><li>Radio</li><li>Website</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">اختيار قناة جماهيرية للوصول إلى عدد كبير من الناس خلال حملة.</span>
+            <ol class="q-options" type="a"><li>Media Mix</li><li>Newspaper</li><li>Wide Reach</li><li>Social Media</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">صفحة موقع مفصلة أو مادة مطبوعة تحتوي معلومات يمكن الرجوع إليها.</span>
+            <ol class="q-options" type="a"><li>Television</li><li>Website</li><li>Email</li><li>Depth &amp; Detail</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">نموذج موقع أو تعليق اجتماعي يسمح للمستخدم بإرسال استجابة.</span>
+            <ol class="q-options" type="a"><li>Interaction</li><li>Radio</li><li>Social Media</li><li>Wide Reach</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">حملة تستخدم وسائل التواصل للانتشار وموقعًا للتفاصيل وبريدًا لفئة محددة.</span>
+            <ol class="q-options" type="a"><li>Newspaper</li><li>Media Mix</li><li>Email</li><li>Depth &amp; Detail</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">حملة طوارئ تحتاج انتشارًا سريعًا ثم صفحة بتفاصيل متجددة. ما المزيج الأنسب؟</span>
+            <ol class="q-options" type="a"><li>وسائل التواصل للنشر السريع + موقع للتفاصيل المحدثة</li><li>صحيفة فقط مهما تأخر التحديث</li><li>بريد فردي فقط لجمهور غير محدد</li><li>راديو فقط مع نموذج إلكتروني غير موجود</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">أي وسيط يناسب جمهورًا قد لا يتوفر له اتصال بالإنترنت ويريد مادة يمكن الاحتفاظ بها؟</span>
+            <ol class="q-options" type="a"><li>وسائل التواصل</li><li>الصحيفة</li><li>نموذج ويب تفاعلي</li><li>موقع بث مباشر فقط</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">لماذا لا توجد وسيلة واحدة هي الأفضل لكل المواقف؟</span>
+            <ol class="q-options" type="a"><li>لأن كل الوسائط لها الخصائص نفسها</li><li>لأن الهدف والجمهور والسرعة والتفاعل والاتصال تختلف من موقف لآخر</li><li>لأن الموقع لا يدعم نصًا</li><li>لأن البريد يصل دائمًا إلى جمهور أوسع من التلفزيون</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">مؤسسة تريد إرسال معلومات مباشرة فقط إلى المشتركين المسجلين. ما القناة الأنسب؟</span>
+            <ol class="q-options" type="a"><li>التلفزيون</li><li>الراديو</li><li>البريد الإلكتروني</li><li>صحيفة عامة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">أي قرار يعكس فهمًا أفضل لمفهوم الدمج بين الوسائط؟</span>
+            <ol class="q-options" type="a"><li>اختيار أكثر من قناة بحيث يكمل كل وسيط نقطة ضعف الآخر</li><li>تكرار الرسالة نفسها في قناة واحدة فقط</li><li>إلغاء الموقع عند وجود وسائل تواصل</li><li>اختيار الوسيلة الأحدث دون النظر للجمهور</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين التلفزيون والموقع الإلكتروني من حيث الوصول والتفصيل والتفاعل. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح لماذا تناسب وسائل التواصل نشر المعلومات بسرعة، وما القيد الذي قد يجعلها غير كافية وحدها. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">حدد وسيلة مناسبة لإرسال معلومات مباشرة لفئة محددة وفسر اختيارك. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">حملة صحية تستهدف كبار السن والطلاب معًا. صمم مزيج وسائط يراعي اختلاف استخدام الإنترنت بين الجمهورين. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">معلومة عاجلة تحتاج انتشارًا سريعًا وتفاصيل دقيقة وإمكان تفاعل. اختر ثلاث وسائل واربط كل وسيلة بهدف محدد في الخطة. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 12 -->
+    <div class="section-card" id="quiz-4-2">
+        <h2><span class="icon">📝</span> Quiz 12 • Lesson 4-2: تصميم المعلومات وتجربة المستخدم للمواقع</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">فريق يلخص احتياجات طالب يستخدم الهاتف بناءً على ملاحظات وبيانات حقيقية.</span>
+            <ol class="q-options" type="a"><li>Repetition</li><li>UCD</li><li>Persona</li><li>Accessibility</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">رسم مكان العنوان والقائمة والزر قبل اختيار الألوان والصور النهائية.</span>
+            <ol class="q-options" type="a"><li>Alignment</li><li>Usability</li><li>Iteration</li><li>Wireframe</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">زر مهم واضح عن الخلفية باستخدام أكثر من إشارة بصرية مناسبة.</span>
+            <ol class="q-options" type="a"><li>Contrast</li><li>Proximity</li><li>Accessibility</li><li>Persona</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">استخدام نفس شكل عناوين الأقسام في صفحات الموقع المختلفة.</span>
+            <ol class="q-options" type="a"><li>UCD</li><li>Repetition</li><li>Iteration</li><li>Wireframe</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">محاذاة النص العربي إلى اليمين ضمن شبكة ثابتة.</span>
+            <ol class="q-options" type="a"><li>Usability</li><li>Persona</li><li>Alignment</li><li>Contrast</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">وضع عنوان قريبًا من الفقرة التابعة له وبعيدًا عن مجموعة أخرى.</span>
+            <ol class="q-options" type="a"><li>Accessibility</li><li>Wireframe</li><li>Repetition</li><li>Proximity</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">اختبار نموذج مع مستخدمين حقيقيين وتعديل القرار وفق ما يحتاجونه.</span>
+            <ol class="q-options" type="a"><li>UCD</li><li>Iteration</li><li>Contrast</li><li>Alignment</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">المستخدم يصل إلى زر التسجيل وينتهي المهمة دون ارتباك.</span>
+            <ol class="q-options" type="a"><li>Persona</li><li>Usability</li><li>Repetition</li><li>Proximity</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">تباين جيد وتسميات واضحة ودعم لوحة المفاتيح وقارئ الشاشة.</span>
+            <ol class="q-options" type="a"><li>Wireframe</li><li>Alignment</li><li>Accessibility</li><li>UCD</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">اختبار Wireframe ثم تغييره وإعادة التجربة بناءً على الأدلة.</span>
+            <ol class="q-options" type="a"><li>Contrast</li><li>Proximity</li><li>Usability</li><li>Iteration</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">وضع العناصر المهمة في مواضع يسهل الوصول إليها على الهاتف ثم اختبارها.</span>
+            <ol class="q-options" type="a"><li>وضع العناصر المهمة في مواضع يسهل الوصول إليها على الهاتف ثم اختبارها</li><li>تغيير كل الألوان فقط</li><li>إلغاء الاختبار</li><li>زيادة عدد الخطوط</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">أي مبدأ يعالج مشكلة بطاقات منتجات تبدو منفصلة بسبب المسافات العشوائية؟</span>
+            <ol class="q-options" type="a"><li>Contrast</li><li>Proximity</li><li>Alignment</li><li>Repetition</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">لماذا قد تضر الاعتماد على اللون وحده لتوضيح معنى؟</span>
+            <ol class="q-options" type="a"><li>لأن اللون يزيد سرعة الصفحة</li><li>لأنه قد يضر Accessibility ويجب ألا يعتمد المعنى على اللون وحده</li><li>لأنه يلغي CSS</li><li>لأنه يمنع التفاعل</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">أي تسلسل تعليمي هو الأقرب لتطبيق UCD؟</span>
+            <ol class="q-options" type="a"><li>فهم المستخدم ← Wireframe ← تطبيق مبادئ التنظيم ← اختبار وتحسين</li><li>اختيار الألوان ← كتابة الشيفرة ← المستخدم</li><li>اختبار A/B قبل وجود تصميم</li><li>اختيار تقنية أحدث أولًا</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">أي مفهوم يفسر الموقف: المستخدم يصل إلى زر التسجيل دون ارتباك؟</span>
+            <ol class="q-options" type="a"><li>Usability</li><li>Persona</li><li>Wireframe</li><li>Contrast</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">اختر اثنين من مبادئ CRAP واشرح كيف يمكن تطبيقهما على صفحة مزدحمة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">قارن بين Usability وAccessibility بمثال عملي لكل منهما. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">اشرح دور Persona وكيف تساعد في اتخاذ قرارات التصميم. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">مستخدم يستخدم الهاتف بيد واحدة ويواجه صعوبة في الوصول لزر الإجراء الرئيسي. صمم قرارًا تصميميًا يعالج المشكلة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">صفحة فيها عناوين متشابهة ومحاذاة عشوائية ومسافات غير منطقية. اربط كل مشكلة بمبدأ CRAP المناسب. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 13 -->
+    <div class="section-card" id="quiz-4-3">
+        <h2><span class="icon">📝</span> Quiz 13 • Lesson 4-3: أساليب تقييم المواقع الإلكترونية</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">باحث يلاحظ أين يتردد المستخدم ويسأله لماذا لم يجد زرًا معينًا.</span>
+            <ol class="q-options" type="a"><li>Qualitative Evaluation</li><li>Page Views (PV)</li><li>Usability Testing</li><li>Heuristic Evaluation</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">فريق يقارن معدلات الإكمال والإيرادات قبل تغيير وبعده.</span>
+            <ol class="q-options" type="a"><li>Bounce Rate</li><li>Quantitative Evaluation</li><li>Interviews</li><li>A/B Testing</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">لوحة بيانات تتابع المشاهدات والتحويلات وسلوك الزيارات.</span>
+            <ol class="q-options" type="a"><li>CVR</li><li>Heuristic Evaluation</li><li>Web Analytics</li><li>Qualitative Evaluation</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">مستخدم يفتح الصفحة مرتين فيحتسب ذلك مشاهدتين.</span>
+            <ol class="q-options" type="a"><li>Usability Testing</li><li>A/B Testing</li><li>Quantitative Evaluation</li><li>Page Views (PV)</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">مؤشر مرتفع ينبه لضعف تفاعل محتمل لكنه لا يشرح السبب وحده.</span>
+            <ol class="q-options" type="a"><li>Bounce Rate</li><li>Interviews</li><li>Qualitative Evaluation</li><li>Web Analytics</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">نسبة من أكملوا التسجيل أو الشراء من المجموعة المقاسة.</span>
+            <ol class="q-options" type="a"><li>Heuristic Evaluation</li><li>CVR</li><li>Quantitative Evaluation</li><li>Page Views (PV)</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">طلب إتمام عملية شراء وملاحظة الأماكن التي يتوقف عندها المستخدم.</span>
+            <ol class="q-options" type="a"><li>A/B Testing</li><li>Web Analytics</li><li>Usability Testing</li><li>Bounce Rate</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">سؤال مستخدمين عن سبب عدم فهمهم زر التسجيل.</span>
+            <ol class="q-options" type="a"><li>Qualitative Evaluation</li><li>Page Views (PV)</li><li>CVR</li><li>Interviews</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">خبير يفحص الاتساق ووضوح حالة النظام ومنع الأخطاء.</span>
+            <ol class="q-options" type="a"><li>Heuristic Evaluation</li><li>Quantitative Evaluation</li><li>Bounce Rate</li><li>Usability Testing</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">تقسيم المستخدمين بين زرين مختلفين ومقارنة معدل التسجيل.</span>
+            <ol class="q-options" type="a"><li>Web Analytics</li><li>A/B Testing</li><li>CVR</li><li>Interviews</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي مقياس كمي يناسب قياس نسبة تحقيق هدف معين؟</span>
+            <ol class="q-options" type="a"><li>Bounce Rate</li><li>CVR</li><li>PV</li><li>Interviews</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">أي طريقة تساعد في فهم سبب تردد المستخدم؟</span>
+            <ol class="q-options" type="a"><li>زيادة عدد الزيارات</li><li>مقابلة أو اختبار قابلية استخدام</li><li>قياس معدل التحويل فقط</li><li>تغيير الألوان دون اختبار</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">لماذا يجب فهم تعريف Bounce Rate قبل تفسيره؟</span>
+            <ol class="q-options" type="a"><li>لأنه ثابت في كل الأدوات</li><li>لأن أدوات التحليل قد تعرّفه بطرق مختلفة</li><li>لأنه لا يفيد أبدًا</li><li>لأنه يساوي CVR</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">أي عبارة تصف التقييم الإرشادي بدقة؟</span>
+            <ol class="q-options" type="a"><li>مراقبة مستخدمين حقيقيين فقط</li><li>خبراء يراجعون الواجهة وفق قواعد عملية</li><li>قياس عدد الزيارات</li><li>اختبار A/B فقط</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">موقع لديه زيارات كثيرة لكن التسجيل منخفض. ما الخطوة الأقوى لفهم السبب؟</span>
+            <ol class="q-options" type="a"><li>استخدام طريقة نوعية مثل اختبار قابلية الاستخدام أو مقابلة</li><li>الاكتفاء بـ PV</li><li>حذف التحليلات</li><li>تغيير كل الصفحة قبل الاختبار</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">قارن بين التقييم النوعي والتقييم الكمي من حيث السؤال الذي يجيب عنه كل منهما وأمثلة الأدوات. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">اشرح الفرق بين CVR وPV ولماذا يجب تعريف المقام والهدف عند حساب معدل التحويل. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">وضح فائدة التقييم الإرشادي وما الذي لا يمكن أن يغني عنه في كل الحالات. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">موقع لديه زيارات كثيرة لكن التسجيل منخفض. صمم خطة تجمع Web Analytics واختبار قابلية الاستخدام للوصول إلى سبب محتمل. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">اختر مقياسًا كميًا وطريقة نوعية لتقييم متجر إلكتروني، ثم وضح كيف ستستخدم النتيجتين معًا. (درجتان)</span></div>
+    </div>
+
+    <!-- Quiz 14 -->
+    <div class="section-card" id="quiz-4-4">
+        <h2><span class="icon">📝</span> Quiz 14 • Lesson 4-4: عملية التحسين التكراري للمواقع</h2>
+        <h3>أولاً: اختر الإجابة الصحيحة (15 درجة)</h3>
+
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">فريق يعدل صفحة ويقيس النتيجة ثم يبدأ تحسينًا جديدًا بناءً على الدليل.</span>
+            <ol class="q-options" type="a"><li>Check</li><li>Define</li><li>Iterative Improvement</li><li>Prototype</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">الفريق يحدد هدف خفض الانسحاب من التسجيل ويختار تغييرًا محددًا للاختبار.</span>
+            <ol class="q-options" type="a"><li>Act</li><li>Ideate</li><li>Test</li><li>Plan</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">تعديل ترتيب حقول النموذج وفق الخطة قبل قياس الأثر.</span>
+            <ol class="q-options" type="a"><li>Do</li><li>Empathize</li><li>Prototype</li><li>Iterative Improvement</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">حساب معدل الإكمال بعد التغيير ومقارنته بما كان قبل التنفيذ.</span>
+            <ol class="q-options" type="a"><li>Define</li><li>Check</li><li>Test</li><li>Plan</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">تثبيت النسخة الأفضل أو بدء دورة جديدة بعد تحليل النتيجة.</span>
+            <ol class="q-options" type="a"><li>Ideate</li><li>Iterative Improvement</li><li>Act</li><li>Do</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">ملاحظة مستخدمين يتعاملون مع الموقع لفهم ما يزعجهم.</span>
+            <ol class="q-options" type="a"><li>Prototype</li><li>Plan</li><li>Check</li><li>Empathize</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">تحديد أن المستخدم لا يجد زر التسجيل على الهاتف.</span>
+            <ol class="q-options" type="a"><li>Define</li><li>Test</li><li>Do</li><li>Act</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">اقتراح مواقع وأشكال مختلفة لزر التسجيل قبل اختيار نموذج.</span>
+            <ol class="q-options" type="a"><li>Iterative Improvement</li><li>Ideate</li><li>Check</li><li>Empathize</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">9</span><span class="q-text">إنشاء نسخة أولية بسيطة لواجهة جديدة قبل التطوير الكامل.</span>
+            <ol class="q-options" type="a"><li>Plan</li><li>Act</li><li>Prototype</li><li>Define</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">10</span><span class="q-text">جعل مستخدمين يجربون النموذج وملاحظة نجاحهم وتعثرهم.</span>
+            <ol class="q-options" type="a"><li>Do</li><li>Empathize</li><li>Ideate</li><li>Test</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">11</span><span class="q-text">أي ترتيب يمثل دورة PDCA؟</span>
+            <ol class="q-options" type="a"><li>Plan → Do → Check → Act</li><li>Do → Act → Plan → Test</li><li>Empathize → Check → VPN → Act</li><li>Plan → Test → JSON → Do</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">12</span><span class="q-text">اختبار المستخدم كشف أن تعريف المشكلة نفسه غير صحيح. ماذا يسمح التفكير التصميمي بفعل؟</span>
+            <ol class="q-options" type="a"><li>منع الرجوع إلى أي مرحلة</li><li>الرجوع إلى Define أو Empathize</li><li>الانتقال إلى Act مباشرة دون فهم</li><li>اعتماد النموذج رغم المشكلة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">13</span><span class="q-text">في اختبار A/B يهدف لقياس أثر نص زر واحد، ما التصميم الأفضل؟</span>
+            <ol class="q-options" type="a"><li>تغيير النص واللون والتخطيط معًا</li><li>عدم تحديد مقياس</li><li>تغيير واضح واحد مع مقياس محدد وخطة تحليل قبل رؤية النتيجة</li><li>اختبار الفائز حسب الانطباع الشخصي</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">14</span><span class="q-text">ما الذي يميز التحسين الجيد وفق الدرس؟</span>
+            <ol class="q-options" type="a"><li>تغيير كبير غير قابل للقياس</li><li>قرار نهائي لا يتكرر</li><li>الاعتماد على أول فكرة</li><li>تغيير صغير قابل للقياس مبني على دليل ويقود إلى تعلم جديد</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">15</span><span class="q-text">Check تبين أن التغيير لم يحقق الهدف. ما التصرف الأقرب في Act؟</span>
+            <ol class="q-options" type="a"><li>تحليل النتيجة وتعديل التغيير أو بدء دورة جديدة</li><li>تجاهل القياس</li><li>إلغاء الهدف دون مراجعة</li><li>اعتبار الفشل نجاحًا</li></ol>
+        </div>
+
+        <h3>ثانياً: الأسئلة المقالية والتطبيقية (10 درجات)</h3>
+        <div class="question-box"><span class="q-num">16</span><span class="q-text">اشرح دورة PDCA واذكر وظيفة كل خطوة في جملة واحدة. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">17</span><span class="q-text">وضح لماذا لا يعد التفكير التصميمي خطًا جامدًا يمكن السير فيه مرة واحدة فقط. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">18</span><span class="q-text">قارن بين Prototype وTest ولماذا لا يجب دمجهما كمفهوم واحد. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">19</span><span class="q-text">صمم اختبار A/B لتغيير زر تسجيل: حدد الفرق بين النسختين، المقياس، وما الذي يجب تثبيته حتى يكون الاستنتاج أوضح. (درجتان)</span></div>
+        <div class="question-box"><span class="q-num">20</span><span class="q-text">موقع يعاني من انسحاب المستخدمين أثناء التسجيل. صمم دورة تحسين كاملة تبدأ بفهم المستخدم ثم تحدد مشكلة وتنتج نموذجًا وتختبره، وبعدها اربط النتيجة بخطوات PDCA. (درجتان)</span></div>
+    </div>
+</div>
+
+<!-- ============================================
+     صفحة الإجابات
+     ============================================ -->
+<div id="page-answers" class="page-content hidden">
+    <div class="chapter-header">
+        <div class="chapter-num">نموذج الإجابة</div>
+        <h1>الإجابات والاختبارات</h1>
+        <div class="subtitle">مفاتيح MCQ + إجابات مقالية نموذجية + إجابات الاختبارات الشاملة</div>
+    </div>
+
+    <div class="section-card">
+        <h2><span class="icon">📖</span> دليل استخدام الإجابات</h2>
+        <p>ستجد هنا مفاتيح الاختيار من متعدد لجميع الكويزات، وإجابات الأسئلة المقالية النموذجية، بالإضافة إلى إجابات الاختبارات الشاملة.</p>
+        <div class="alert-box warning">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">
+                <strong>تنبيه تصحيح</strong>
+                <p>الإجابات المفتوحة «نموذجية»؛ تقبل صياغة أخرى إذا تضمنت نفس المفاهيم والعلاقات المطلوبة في السؤال.</p>
+            </div>
+        </div>
+
+        <div class="lesson-nav" style="margin-top:20px;">
+            <a onclick="scrollToId('ans-quizzes')">📝 إجابات الكويزات</a>
+            <a onclick="scrollToId('ans-exams')">🎓 إجابات الاختبارات</a>
+        </div>
+    </div>
+
+    <!-- الإجابات -->
+    <div class="section-card" id="ans-quizzes">
+        <h2><span class="icon">📝</span> مفاتيح الكويزات - الاختيار من متعدد</h2>
+
+        <h3>Quiz 01 - Lesson 1-1</h3>
+        <div class="table-wrapper">
+            <table class="answer-table">
+                <thead><tr><th>م</th><th>الإجابة</th><th>الإجابة الصحيحة</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>أ</td><td>Moore's Law</td></tr>
+                    <tr><td>2</td><td>ب</td><td>Cloud Computing</td></tr>
+                    <tr><td>3</td><td>ج</td><td>Edge Computing</td></tr>
+                    <tr><td>4</td><td>د</td><td>Cashless Payment</td></tr>
+                    <tr><td>5</td><td>أ</td><td>E-commerce</td></tr>
+                    <tr><td>6</td><td>ب</td><td>Remote Work</td></tr>
+                    <tr><td>7</td><td>ج</td><td>AR</td></tr>
+                    <tr><td>8</td><td>د</td><td>VR</td></tr>
+                    <tr><td>9</td><td>أ</td><td>Autonomous Driving</td></tr>
+                    <tr><td>10</td><td>ب</td><td>Quantum Computing</td></tr>
+                    <tr><td>11</td><td>أ</td><td>حواسيب ← حاسب ← إنترنت ← هواتف ← سحابة</td></tr>
+                    <tr><td>12</td><td>ب</td><td>تعدد الأنوية والتصميمات المتخصصة</td></tr>
+                    <tr><td>13</td><td>ج</td><td>قنوات رقمية مع بديل مناسب</td></tr>
+                    <tr><td>14</td><td>د</td><td>قد تتفوق في مسائل محددة</td></tr>
+                    <tr><td>15</td><td>أ</td><td>Edge ثم Cloud</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>إجابات الأسئلة المقالية - Quiz 01</h4>
+        <div class="answer-section"><span class="answer-label">إجابة 16</span><p>الحوسبة السحابية تعالج وتخزن البيانات على خوادم بعيدة عبر الإنترنت، لذلك تناسب التخزين والخدمات المشتركة لكنها قد تتأثر بزمن الشبكة. أما الحوسبة الطرفية فتعالج البيانات قرب الجهاز أو المستشعر لتقليل زمن الاستجابة. مثال السحابة: حفظ ملفات المدرسة. مثال الحافة: معالجة بيانات مركبة محليًا لاتخاذ قرار كبح سريع.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 17</span><p>جعلت الوصول ممكنًا من أماكن مختلفة. مثالان: حضور درس من الهاتف، والعمل عن بعد. كما سهّلت خدمات مثل التجارة الإلكترونية والدفع الرقمي.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 18</span><p>قانون مور ملاحظة تاريخية بأن عدد الترانزستورات يتضاعف تقريبًا كل عامين، وليس قانونًا يضمن تضاعف السرعة حرفيًا. ومع تباطؤ التصغير يمكن تحسين الأداء بتعدد الأنوية والمعالجة المتوازية والتصميمات المتخصصة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 19</span><p>الفائدة: سرعة وسهولة الدفع. التحدي: قد يستبعد من لا يملك هاتفًا مناسبًا أو اتصالًا جيدًا. الإجراء: توفير قنوات دفع رقمية مع بديل مناسب.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 20</span><p>تعالج المركبة عند الحافة بيانات الكاميرات والرادار محليًا لاتخاذ قرارات فورية، لأن إرسالها للسحابة قد يضيف تأخيرًا. ويمكن إرسال السجلات والملخصات لاحقًا إلى السحابة.</p></div>
+
+        <h3>Quiz 02 - Lesson 1-2</h3>
+        <div class="table-wrapper">
+            <table class="answer-table">
+                <thead><tr><th>م</th><th>الإجابة</th><th>الإجابة الصحيحة</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>ج</td><td>AI</td></tr>
+                    <tr><td>2</td><td>د</td><td>Machine Learning</td></tr>
+                    <tr><td>3</td><td>أ</td><td>Deep Learning</td></tr>
+                    <tr><td>4</td><td>ب</td><td>ANN</td></tr>
+                    <tr><td>5</td><td>ج</td><td>Generative AI</td></tr>
+                    <tr><td>6</td><td>د</td><td>Hallucination</td></tr>
+                    <tr><td>7</td><td>أ</td><td>Training Data</td></tr>
+                    <tr><td>8</td><td>ب</td><td>Narrow AI</td></tr>
+                    <tr><td>9</td><td>ج</td><td>Classification</td></tr>
+                    <tr><td>10</td><td>د</td><td>Explicit Programming</td></tr>
+                    <tr><td>11</td><td>أ</td><td>AI ⊃ ML ⊃ DL ⊃ GenAI</td></tr>
+                    <tr><td>12</td><td>ب</td><td>قد يضعف ويحتاج بيانات إضافية</td></tr>
+                    <tr><td>13</td><td>ج</td><td>تصنيف لا توليد</td></tr>
+                    <tr><td>14</td><td>د</td><td>مقارنة بمصادر موثوقة</td></tr>
+                    <tr><td>15</td><td>أ</td><td>توثيق المصادر والمراجعة</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>إجابات الأسئلة المقالية - Quiz 02</h4>
+        <div class="answer-section"><span class="answer-label">إجابة 16</span><p>AI مجال أوسع يضم أنظمة تؤدي مهام ذكية. ML جزء من AI يتعلم الأنماط من البيانات. مثال AI: مساعد صوتي. مثال ML: مرشح Spam.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 17</span><p>في البرمجة الصريحة يكتب المبرمج القواعد مباشرة. في التعلم الآلي تُقدم بيانات وأمثلة للنظام فيتعلم منها نموذجًا.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 18</span><p>الهلوسة ناتج يبدو مقنعًا لكنه غير صحيح أو غير مدعوم بمصدر موثوق. جودة الصياغة لا تثبت صحة المعلومة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 19</span><p>قد يضعف النموذج لأن البيانات تحتوي أمثلة قليلة. لتحسين الثقة: جمع بيانات إضافية موثوقة، واختبار النموذج على حالات مستقلة.</p></div>
+        <div class="answer-section"><span class="answer-label">إجابة 20</span><p>سياسة: (1) استخدام GenAI للمساعدة لا للنسخ. (2) توثيق المصادر. (3) التحقق من الادعاءات من مصادر موثوقة.</p></div>
+
+        <h3>مفاتيح باقي الكويزات (03 إلى 14)</h3>
+        <div class="table-wrapper">
+            <table class="answer-table">
+                <thead><tr><th>الكويز</th><th>الدرس</th><th>مفاتيح الإجابات (1-15)</th></tr></thead>
+                <tbody>
+                    <tr><td>Quiz 03</td><td>1-3</td><td>أ ب ج د أ ب ج د أ ب أ ب ج د أ</td></tr>
+                    <tr><td>Quiz 04</td><td>1-4</td><td>ج د أ ب ج د أ ب ج د د ب ج أ ج</td></tr>
+                    <tr><td>Quiz 05</td><td>2-1</td><td>أ ب ج د أ ب ج د أ ب ب ج د أ ب</td></tr>
+                    <tr><td>Quiz 06</td><td>2-2</td><td>ج د أ ب ج د أ ب ج د ج ب د أ ب</td></tr>
+                    <tr><td>Quiz 07</td><td>2-3</td><td>أ ب ج د أ ب ج د أ ب أ ب ج د أ</td></tr>
+                    <tr><td>Quiz 08</td><td>3-1</td><td>ج د أ ب ج د أ ب ج ج أ ج أ ب ب</td></tr>
+                    <tr><td>Quiz 09</td><td>3-2</td><td>أ ب ج د أ ب ج د أ ب أ ج ب د أ</td></tr>
+                    <tr><td>Quiz 10</td><td>3-3</td><td>ج د أ ب ج د أ ب ج د أ ج ب د أ</td></tr>
+                    <tr><td>Quiz 11</td><td>4-1</td><td>أ ب ج د أ ب ج د أ ب أ ب ج د أ</td></tr>
+                    <tr><td>Quiz 12</td><td>4-2</td><td>ج د أ ب ج د أ ب ج د أ ب ج ب أ</td></tr>
+                    <tr><td>Quiz 13</td><td>4-3</td><td>ج ب ج د أ ب ج د أ ب ب أ ج د أ</td></tr>
+                    <tr><td>Quiz 14</td><td>4-4</td><td>ج د أ ب ج د أ ب ج د أ ب ج د أ</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>إجابات الأسئلة المقالية - Quiz 03 إلى 14 (نموذجية مختصرة)</h3>
+        <div class="answer-section"><span class="answer-label">Quiz 03</span><p><strong>16:</strong> نظام التوصية يعتمد على بيانات تفاعل المستخدم، والصيانة التنبؤية على بيانات الحساسات. <strong>17:</strong> جودة البيانات حاسمة لأن النموذج يتعلم منها؛ بيانات ناقصة أو متحيزة تؤدي لنتائج ضعيفة. <strong>18:</strong> Black Box صعوبة تفسير القرار، Hallucination ناتج غير صحيح يبدو مقنعًا. <strong>19:</strong> النظام يحلل الأشعة ويبرز مناطق مشتبه بها، لكن التشخيص النهائي للطبيب. <strong>20:</strong> المراجعة البشرية إلزامية عند أثر خطأ كبير أو بيانات حساسة أو ثقة منخفضة.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 04</span><p><strong>16:</strong> العدالة تمنع التمييز، الشفافية توضح الاستخدام. قد يكون النظام عادلًا لكن غير شفاف. <strong>17:</strong> المساءلة تحديد جهة يمكن محاسبتها ومراجعة القرار. <strong>18:</strong> XAI تساعد على فهم العوامل المؤثرة في القرار فتسمح بالمراجعة. <strong>19:</strong> المصادر: بيانات غير ممثلة أو تسميات متحيزة. الاختبار: مقارنة معدلات الأخطاء بين المجموعات. <strong>20:</strong> قائمة: العدالة، الشفافية، الخصوصية، المساءلة.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 05</span><p><strong>16:</strong> الشهادة الرقمية تربط هوية الموقع بمفتاح عام، والمصادقة تتحقق من هوية المستخدم. <strong>17:</strong> TLS يجمع بين المفتاح العام للتحقق والمتماثل للكفاءة. <strong>18:</strong> 2FA عاملان مستقلان، MFA عاملان أو أكثر من فئات مختلفة. <strong>19:</strong> HTTPS + شهادة موثوقة + MFA. <strong>20:</strong> التوقيع الرقمي + شهادة موثوقة + عدم التنصل.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 06</span><p><strong>16:</strong> Firewall يطبق قواعد على حركة الشبكة، VPN يحمي قناة الاتصال. <strong>17:</strong> DMZ تعزل الخدمات العامة عن الشبكة الداخلية. <strong>18:</strong> Zero Trust يتحقق من الهوية والجهاز والسياق والصلاحية. <strong>19:</strong> VPN + أمن طرفي + تحقق صلاحيات + Zero Trust. <strong>20:</strong> التقسيم وZero Trust وأقل صلاحية تقلل الانتشار.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 07</span><p><strong>16:</strong> الاحتواء يحد الانتشار، الاستئصال يزيل السبب، الاستعادة تعيد الخدمة. <strong>17:</strong> الدروس المستفادة تحول النتائج إلى تحسينات. <strong>18:</strong> الأثر حجم الضرر، الاحتمالية ترجيح الوقوع. <strong>19:</strong> التحقق ← الاحتواء ← الاستئصال ← الاستعادة. <strong>20:</strong> معلومات إضافية: نوع الأصول وقيمتها والأثر المالي والتشغيلي.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 08</span><p><strong>16:</strong> Frontend يعرض ويجمع، Backend يعالج ويقرر. <strong>17:</strong> Data Layer تخزن وتسترجع وقد تشمل قواعد بيانات وذاكرة مؤقتة وخدمات. <strong>18:</strong> Frontend → Backend → Data Layer → Backend → Frontend. <strong>19:</strong> Frontend يعرض، Backend يتحقق، Data Layer تخزن. <strong>20:</strong> افحص Frontend (أرسل الطلب؟)، Backend (أرجع نتيجة؟)، Data Layer (يوجد منتجات؟).</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 09</span><p><strong>16:</strong> Client يرسل الطلب، Server يعالجه ويرد. <strong>17:</strong> GET لطلب مورد، POST لإرسال بيانات. <strong>18:</strong> 404 المورد غير موجود، 500 خطأ خادم. <strong>19:</strong> Client → Request عبر HTTPS → Server يعالج → Response برمز حالة. <strong>20:</strong> API تحدد التبادل، JSON تمثل البيانات، HTTPS يحمي القناة.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 10</span><p><strong>16:</strong> HTML للبنية، CSS للمظهر، JavaScript للسلوك. <strong>17:</strong> Semantic HTML يمنح عناصر معنى يفهمه قارئ الشاشة. <strong>18:</strong> Responsive يتكيف مع الشاشات، Mobile First يبدأ من الهاتف. <strong>19:</strong> تحسينات: ترتيب تركيز واضح + عناصر دلالية + تباين. <strong>20:</strong> HTML دلالي + CSS متجاوب + دعم لوحة مفاتيح وقارئ شاشة.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 11</span><p><strong>16:</strong> التلفزيون وصول واسع وأحادي الاتجاه، الموقع تفاصيل وتفاعل ويحتاج إنترنت. <strong>17:</strong> وسائل التواصل سريعة لكن قد لا تكفي للتفاصيل الطويلة. <strong>18:</strong> البريد الإلكتروني للفئات المحددة. <strong>19:</strong> TV/Radio لكبار السن، وسائل التواصل للطلاب، موقع للتفاصيل. <strong>20:</strong> وسائل التواصل للنشر، موقع للتفاصيل، بريد للتفاعل المباشر.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 12</span><p><strong>16:</strong> Contrast للتمييز، Proximity لتجميع المرتبط. <strong>17:</strong> Usability سهولة إنجاز المهمة، Accessibility إتاحة لأصحاب القدرات المختلفة. <strong>18:</strong> Persona تمثيل لمستخدم مبني على بحث. <strong>19:</strong> ضع زر الإجراء الرئيسي في منطقة يسهل الوصول إليها. <strong>20:</strong> عناوين متشابهة = Contrast، محاذاة عشوائية = Alignment، مسافات غير منطقية = Proximity.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 13</span><p><strong>16:</strong> النوعي يجيب لماذا، الكمي يجيب كم. <strong>17:</strong> PV عدد المشاهدات، CVR نسبة تحقيق الهدف. <strong>18:</strong> التقييم الإرشادي مفيد لكن لا يغني عن المستخدمين الحقيقيين. <strong>19:</strong> Web Analytics ← تحديد المكان، Usability Testing ← فهم السبب. <strong>20:</strong> CVR كمي + اختبار قابلية استخدام نوعي.</p></div>
+        <div class="answer-section"><span class="answer-label">Quiz 14</span><p><strong>16:</strong> Plan تخطيط، Do تنفيذ، Check قياس، Act تصرف. <strong>17:</strong> قد يكشف الاختبار أن المشكلة مصاغة خطأ فيرجع للتعريف. <strong>18:</strong> Prototype نموذج، Test تجربة؛ لا يدمجان. <strong>19:</strong> نسختان تختلفان في نص الزر فقط، مقياس CVR. <strong>20:</strong> Empathize ← Define ← Ideate ← Prototype ← Test ← PDCA.</p></div>
+    </div>
+
+    <!-- إجابات الاختبارات -->
+    <div class="section-card" id="ans-exams">
+        <h2><span class="icon">🎓</span> إجابات الاختبارات الشاملة</h2>
+
+        <h3>اختبار شامل 1 - مستوى متوسط</h3>
+        <div class="table-wrapper">
+            <table class="answer-table">
+                <thead><tr><th>م</th><th>الإجابة</th><th>الإجابة الصحيحة</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>أ</td><td>Moore's Law</td></tr>
+                    <tr><td>2</td><td>أ</td><td>Hallucination</td></tr>
+                    <tr><td>3</td><td>أ</td><td>Digital Certificate</td></tr>
+                    <tr><td>4</td><td>أ</td><td>Data Layer</td></tr>
+                    <tr><td>5</td><td>أ</td><td>مشكلة من جهة الخادم</td></tr>
+                    <tr><td>6</td><td>أ</td><td>CSS</td></tr>
+                    <tr><td>7</td><td>أ</td><td>Proximity</td></tr>
+                    <tr><td>8</td><td>أ</td><td>Test</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>صح / خطأ</h4>
+        <div class="answer-section"><span class="answer-label">الإجابات</span><p>1- خطأ | 2- صح | 3- خطأ | 4- خطأ</p></div>
+        <h4>مصطلحات</h4>
+        <div class="answer-section"><span class="answer-label">الإجابات</span><p><strong>Zero Trust:</strong> لا ثقة تلقائية: تحقق من الهوية والصلاحية والجهاز والسياق.<br><strong>Hallucination:</strong> معلومات مولدة تبدو مقنعة لكنها غير صحيحة.<br><strong>Frontend:</strong> الجزء المرئي/التفاعلي.<br><strong>Accessibility:</strong> جعل المنتج قابلًا للاستخدام لذوي القدرات المتنوعة.<br><strong>PDCA:</strong> Plan → Do → Check → Act.</p></div>
+
+        <h3>اختبار شامل 2 - مستوى متقدم</h3>
+        <div class="table-wrapper">
+            <table class="answer-table">
+                <thead><tr><th>م</th><th>الإجابة</th><th>الإجابة الصحيحة</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>أ</td><td>مراجعة بشرية والتحقق</td></tr>
+                    <tr><td>2</td><td>أ</td><td>MFA بعامل مستقل</td></tr>
+                    <tr><td>3</td><td>أ</td><td>DMZ</td></tr>
+                    <tr><td>4</td><td>أ</td><td>Containment وEradication</td></tr>
+                    <tr><td>5</td><td>أ</td><td>API تحدد التبادل، JSON تمثل البيانات</td></tr>
+                    <tr><td>6</td><td>أ</td><td>Responsive Design</td></tr>
+                    <tr><td>7</td><td>أ</td><td>Usability Testing / Interview</td></tr>
+                    <tr><td>8</td><td>أ</td><td>الرجوع إلى Define/Empathize</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>صح / خطأ</h4>
+        <div class="answer-section"><span class="answer-label">الإجابات</span><p>1- خطأ | 2- صح | 3- خطأ | 4- صح</p></div>
+
+        <h3>اختبار محاكاة زمني</h3>
+        <div class="table-wrapper">
+            <table class="answer-table">
+                <thead><tr><th>م</th><th>الإجابة</th><th>الإجابة الصحيحة</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>أ</td><td>Fairness</td></tr>
+                    <tr><td>2</td><td>أ</td><td>سلامة البيانات وهوية الموقّع</td></tr>
+                    <tr><td>3</td><td>أ</td><td>Backend</td></tr>
+                    <tr><td>4</td><td>أ</td><td>404</td></tr>
+                    <tr><td>5</td><td>أ</td><td>Semantic HTML</td></tr>
+                    <tr><td>6</td><td>أ</td><td>Contrast</td></tr>
+                    <tr><td>7</td><td>أ</td><td>Heuristic Evaluation</td></tr>
+                    <tr><td>8</td><td>أ</td><td>Check</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>صح / خطأ</h4>
+        <div class="answer-section"><span class="answer-label">الإجابات</span><p>1- خطأ | 2- صح | 3- خطأ | 4- صح</p></div>
+    </div>
+
+    <div class="section-card">
+        <h2><span class="icon">💡</span> ملاحظات التصحيح</h2>
+        <div class="alert-box warning">
+            <div class="alert-icon">📌</div>
+            <div class="alert-content">
+                <strong>في أسئلة «حلل / صمم / مستويات عليا»</strong>
+                <p>لا يشترط التطابق اللفظي مع النموذج. تُمنح الدرجة على صحة المفهوم، وضوح العلاقة أو الخطوات، وجود التبرير المطلوب.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     صفحة الاختبارات
+     ============================================ -->
+<div id="page-exams" class="page-content hidden">
+    <div class="chapter-header">
+        <div class="chapter-num">الاختبارات الشاملة</div>
+        <h1>نماذج الاختبارات النهائية</h1>
+        <div class="subtitle">متوسط | متقدم | محاكاة زمنية</div>
+    </div>
+
+    <div class="alert-box info">
+        <div class="alert-icon">📌</div>
+        <div class="alert-content">
+            <strong>الإجابات النموذجية</strong>
+            <p>جميع إجابات الاختبارات متاحة في قسم <a onclick="showPage('answers')" style="color:#1976d2; font-weight:700; cursor:pointer; text-decoration:underline;">الإجابات</a> → إجابات الاختبارات.</p>
+        </div>
+    </div>
+
+    <div class="lesson-nav">
+        <a onclick="scrollToId('exam-1')">📋 اختبار 1 - متوسط</a>
+        <a onclick="scrollToId('exam-2')">🎓 اختبار 2 - متقدم</a>
+        <a onclick="scrollToId('exam-3')">⏱️ محاكاة زمنية</a>
+    </div>
+
+    <!-- اختبار 1 -->
+    <div class="section-card" id="exam-1">
+        <h2><span class="icon">📋</span> اختبار شامل 1 - مستوى متوسط</h2>
+        <p><strong>الزمن المقترح: 50 دقيقة</strong></p>
+
+        <h3>اختيار من متعدد</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">أي مفهوم يصف تضاعف عدد الترانزستورات تقريبًا كل عامين؟</span>
+            <ol class="q-options" type="a"><li>Moore's Law</li><li>Zero Trust</li><li>PDCA</li><li>API</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">أي مفهوم يصف معلومة غير صحيحة تبدو مقنعة من AI؟</span>
+            <ol class="q-options" type="a"><li>Hallucination</li><li>Black Box</li><li>VPN</li><li>Wireframe</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">أي تقنية تساعد على التحقق من هوية الخادم في HTTPS؟</span>
+            <ol class="q-options" type="a"><li>Digital Certificate</li><li>CSS</li><li>DMZ</li><li>JSON</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">أي طبقة تخزن البيانات وتسترجعها؟</span>
+            <ol class="q-options" type="a"><li>Data Layer</li><li>Frontend</li><li>CSS</li><li>Firewall</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">ماذا يعني HTTP 500؟</span>
+            <ol class="q-options" type="a"><li>مشكلة من جهة الخادم</li><li>نجاح الطلب</li><li>المورد غير موجود</li><li>اتصال غير مشفر</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">أي تقنية تحدد مظهر صفحة الويب؟</span>
+            <ol class="q-options" type="a"><li>CSS</li><li>HTML</li><li>JavaScript</li><li>API</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">أي مبدأ CRAP يجمع العناصر المرتبطة؟</span>
+            <ol class="q-options" type="a"><li>Proximity</li><li>Contrast</li><li>Alignment</li><li>Repetition</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">أي مرحلة في Design Thinking تختبر النموذج مع المستخدمين؟</span>
+            <ol class="q-options" type="a"><li>Test</li><li>Ideate</li><li>Define</li><li>Plan</li></ol>
+        </div>
+
+        <h3>صح / خطأ</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">قانون مور يتحدث حرفيًا عن تضاعف سرعة كل حاسب كل عامين. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">Zero Trust لا يمنح الثقة تلقائيًا بسبب موقع المستخدم داخل الشبكة. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">API وJSON مصطلحان يؤديان الوظيفة نفسها. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">التقييم الكمي وحده يفسر دائمًا سبب سلوك المستخدم. (صح / خطأ)</span></div>
+
+        <h3>مصطلحات</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">اكتب تعريفًا مختصرًا للمصطلح: Zero Trust.</span></div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">اكتب تعريفًا مختصرًا للمصطلح: Hallucination.</span></div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">اكتب تعريفًا مختصرًا للمصطلح: Frontend.</span></div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">اكتب تعريفًا مختصرًا للمصطلح: Accessibility.</span></div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">اكتب تعريفًا مختصرًا للمصطلح: PDCA.</span></div>
+    </div>
+
+    <!-- اختبار 2 -->
+    <div class="section-card" id="exam-2">
+        <h2><span class="icon">🎓</span> اختبار شامل 2 - مستوى متقدم</h2>
+        <p><strong>الزمن المقترح: 60 دقيقة</strong></p>
+
+        <h3>اختيار من متعدد</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">قرار AI في تشخيص طبي عالي الأثر؛ ما الإجراء الأقوى؟</span>
+            <ol class="q-options" type="a"><li>مراجعة بشرية والتحقق من البيانات والنتيجة</li><li>قبول الحكم دون مراجعة</li><li>إخفاء طريقة الاستخدام</li><li>تقليل البيانات عشوائيًا</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">تسربت كلمة المرور؛ أي إجراء يقلل خطر الدخول غير المصرح به مباشرة؟</span>
+            <ol class="q-options" type="a"><li>MFA بعامل مستقل إضافي</li><li>استخدام كلمة مرور ثانية من نفس الفئة فقط</li><li>إلغاء TLS</li><li>إلغاء الشهادة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">خادم عام يجب عزله عن الشبكة الداخلية؛ أين يوضع؟</span>
+            <ol class="q-options" type="a"><li>DMZ</li><li>Frontend</li><li>Data Layer</li><li>CSS</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">بعد اكتشاف حادث برمجية خبيثة، ما الذي يسبق Recovery عادة؟</span>
+            <ol class="q-options" type="a"><li>Containment وEradication</li><li>Lessons Learned فقط</li><li>تجاهل السبب</li><li>إعادة التشغيل فقط</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">أي اختيار يطابق API مع JSON بدقة؟</span>
+            <ol class="q-options" type="a"><li>API تحدد طريقة التبادل، وJSON تمثل البيانات</li><li>كلاهما لغة تنسيق</li><li>JSON بروتوكول تشفير</li><li>API رمز حالة</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">صفحة تعمل على الحاسب لكنها تنهار على الهاتف؛ ما المفهوم الأوضح؟</span>
+            <ol class="q-options" type="a"><li>Responsive Design</li><li>Non-repudiation</li><li>DMZ</li><li>PDCA</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">موقع لديه PV مرتفع وCVR منخفض؛ ما الخطوة الأقوى لفهم السبب؟</span>
+            <ol class="q-options" type="a"><li>استخدام طريقة نوعية مثل Usability Testing أو Interview</li><li>الاكتفاء بـ PV</li><li>حذف التحليلات</li><li>تغيير كل الصفحة قبل الاختبار</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">في Design Thinking، اكتشف Test أن المشكلة مصاغة خطأ؛ ماذا يمكن فعله؟</span>
+            <ol class="q-options" type="a"><li>الرجوع إلى Define/Empathize</li><li>منع الرجوع</li><li>الانتقال إلى Act</li><li>إلغاء المستخدم</li></ol>
+        </div>
+
+        <h3>صح / خطأ</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">Black Box وHallucination لهما المعنى نفسه. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">Defense in Depth يعتمد على طبقات متعددة لا وسيلة واحدة. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">Wireframe يجب أن يركز أولًا على الألوان والزخارف النهائية. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">A/B الجيد يحدد المقياس قبل الحكم على النتيجة. (صح / خطأ)</span></div>
+    </div>
+
+    <!-- اختبار 3 -->
+    <div class="section-card" id="exam-3">
+        <h2><span class="icon">⏱️</span> اختبار محاكاة زمني</h2>
+        <p><strong>الزمن المقترح: 70 دقيقة</strong></p>
+
+        <h3>اختيار من متعدد</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">أي مفهوم يربط التحيز بضرورة التحقق من عدالة نتائج AI؟</span>
+            <ol class="q-options" type="a"><li>Fairness</li><li>JSON</li><li>TLS</li><li>GET</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">ما الدور الأساسي للتوقيع الرقمي؟</span>
+            <ol class="q-options" type="a"><li>دعم سلامة البيانات وهوية الموقّع وعدم التنصل</li><li>تسريع الشبكة</li><li>تغيير المظهر</li><li>تخزين البيانات</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">أي طبقة في تطبيق ويب تعالج التحقق من المخزون؟</span>
+            <ol class="q-options" type="a"><li>Backend</li><li>Frontend</li><li>CSS</li><li>HTML</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">أي رمز حالة يعني المورد غير موجود؟</span>
+            <ol class="q-options" type="a"><li>404</li><li>200</li><li>500</li><li>POST</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">5</span><span class="q-text">أي مفهوم يساعد قارئ الشاشة على فهم بنية الصفحة؟</span>
+            <ol class="q-options" type="a"><li>Semantic HTML</li><li>VPN</li><li>MFA</li><li>DMZ</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">6</span><span class="q-text">أي مبدأ CRAP يجعل العناوين المهمة أكثر بروزًا؟</span>
+            <ol class="q-options" type="a"><li>Contrast</li><li>Proximity</li><li>Repetition</li><li>Alignment</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">7</span><span class="q-text">أي تقييم يعتمد على مراجعة خبير وفق قواعد؟</span>
+            <ol class="q-options" type="a"><li>Heuristic Evaluation</li><li>PV</li><li>CVR</li><li>GET</li></ol>
+        </div>
+        <div class="question-box"><span class="q-num">8</span><span class="q-text">أي خطوة PDCA تقيس النتائج بعد التغيير؟</span>
+            <ol class="q-options" type="a"><li>Check</li><li>Plan</li><li>Do</li><li>Act</li></ol>
+        </div>
+
+        <h3>صح / خطأ</h3>
+        <div class="question-box"><span class="q-num">1</span><span class="q-text">MFA تعني استخدام كلمات مرور متعددة من الفئة نفسها فقط. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">2</span><span class="q-text">Frontend وBackend وData Layer تتعاون لتنفيذ طلب المستخدم. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">3</span><span class="q-text">Bounce Rate له تعريف وحساب واحد ثابت في كل أدوات التحليل. (صح / خطأ)</span></div>
+        <div class="question-box"><span class="q-num">4</span><span class="q-text">Prototype وTest مرحلتان مستقلتان في النموذج المستخدم. (صح / خطأ)</span></div>
+    </div>
+</div>
+
+</div><!-- end container -->
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-copy">© 2026 Za3bot. All rights reserved. Designed by Mohamed Nabil Sadek.</div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/Za3bot2026" target="_blank" rel="noopener noreferrer" aria-label="Facebook" onclick="return openExternal(event,'https://www.facebook.com/Za3bot2026')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/mohamed-nabil-sadek/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" onclick="return openExternal(event,'https://www.linkedin.com/in/mohamed-nabil-sadek/')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.34 18.34V10H5.67v8.34h2.67M7 8.85a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1M18.34 18.34v-4.6c0-2.46-1.31-3.6-3.06-3.6-1.4 0-2.03.77-2.38 1.31v-1.12h-2.67c.03.75 0 8 0 8h2.67v-4.66c0-.25.02-.5.09-.68.2-.5.66-1.02 1.42-1.02.99 0 1.39.76 1.39 1.87v4.5h2.54z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@mohamednabil9634" target="_blank" rel="noopener noreferrer" aria-label="TikTok" onclick="return openExternal(event,'https://www.tiktok.com/@mohamednabil9634')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-3.14-1.39 4.28 4.28 0 0 1-1.14-2.93h-3.1v13.4a2.6 2.6 0 1 1-1.83-2.48v-3.16A5.75 5.75 0 0 0 5.5 9c-3.18 0-5.75 2.57-5.75 5.75S2.32 20.5 5.5 20.5s5.75-2.57 5.75-5.75V9.03a7.36 7.36 0 0 0 4.3 1.38V7.3a4.27 4.27 0 0 1-2.85-1.02c.3.05-2.1-.02-2.1-.02V5.82h6z" transform="translate(1,0.5) scale(0.95)"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* ============================================
+   نظام التنقل بين الصفحات
+   ============================================ */
+function showPage(pageId) {
+    document.querySelectorAll('.page-content').forEach(function(p) {
+        p.classList.add('hidden');
+        p.style.display = 'none';
+    });
+
+    const page = document.getElementById('page-' + pageId);
+    if (page) {
+        page.classList.remove('hidden');
+        page.style.display = 'block';
+    } else {
+        console.warn('الصفحة غير موجودة:', pageId);
+        return;
+    }
+
+    document.querySelectorAll('.navbar-links a[data-page]').forEach(function(a) {
+        a.classList.remove('active');
+    });
+
+    const activeLink = document.querySelector('.navbar-links a[data-page="' + pageId + '"]');
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    clearSearch();
+}
+
+/* التنقل إلى قسم داخل صفحة */
+function goTo(pageId, targetId) {
+    showPage(pageId);
+    setTimeout(function() {
+        scrollToId(targetId);
+    }, 200);
+}
+
+/* التمرير إلى عنصر محدد */
+function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        const offset = 150;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+}
+
+/* تهيئة التنقل */
+function initNavigation() {
+    document.querySelectorAll('.navbar-links a[data-page]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const pageId = this.getAttribute('data-page');
+            if (pageId) {
+                showPage(pageId);
+            }
+        });
+    });
+}
+
+/* ============================================
+   نظام البحث
+   ============================================ */
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+const searchPanel = document.getElementById('searchPanel');
+const searchHeader = document.getElementById('searchHeader');
+const searchResultsList = document.getElementById('searchResultsList');
+
+let searchTimeout;
+
+if (searchInput) {
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        clearTimeout(searchTimeout);
+        if (query.length > 0) {
+            if (searchClear) searchClear.classList.add('visible');
+            searchTimeout = setTimeout(function() { performSearch(query); }, 250);
+        } else {
+            if (searchClear) searchClear.classList.remove('visible');
+            clearSearch();
+        }
+    });
+}
+
+if (searchClear) {
+    searchClear.addEventListener('click', function() {
+        if (searchInput) searchInput.value = '';
+        clearSearch();
+    });
+}
+
+function clearSearch() {
+    if (searchClear) searchClear.classList.remove('visible');
+    if (searchPanel) searchPanel.classList.remove('visible');
+}
+
+function getPageName(pageId) {
+    const names = {
+        'home': 'الرئيسية',
+        'book-answers': 'إجابات الكتاب',
+        'quizzes': 'الكويزات',
+        'answers': 'الإجابات',
+        'exams': 'الاختبارات'
+    };
+    return names[pageId] || pageId;
+}
+
+function performSearch(query) {
+    const queryLower = query.toLowerCase();
+    const results = [];
+
+    document.querySelectorAll('.page-content').forEach(function(page) {
+        const pageId = page.id.replace('page-', '');
+        const pageName = getPageName(pageId);
+
+        page.querySelectorAll('h2, h3, h4').forEach(function(heading) {
+            const text = heading.textContent;
+            if (text.toLowerCase().includes(queryLower)) {
+                const card = heading.closest('.section-card');
+                const targetId = card ? card.id : '';
+                results.push({
+                    pageId: pageId,
+                    pageName: pageName,
+                    targetId: targetId,
+                    title: text.trim(),
+                    snippet: 'اضغط للانتقال إلى ' + pageName
+                });
+            }
+        });
+
+        page.querySelectorAll('.question-box, .answer-section').forEach(function(el) {
+            const text = el.textContent;
+            const textLower = text.toLowerCase();
+            if (textLower.includes(queryLower)) {
+                const heading = el.querySelector('.q-text, .answer-label');
+                let title = heading ? heading.textContent.trim() : text.substring(0, 60).trim();
+                const idx = textLower.indexOf(queryLower);
+                const start = Math.max(0, idx - 30);
+                const end = Math.min(text.length, idx + 90);
+                const snippet = text.substring(start, end).trim();
+
+                const key = pageId + '|' + title;
+                if (!results.some(r => r.pageId + '|' + r.title === key)) {
+                    results.push({
+                        pageId: pageId,
+                        pageName: pageName,
+                        targetId: el.id || '',
+                        title: title.substring(0, 80),
+                        snippet: '...' + snippet + '...'
+                    });
+                }
+            }
+        });
+    });
+
+    displayResults(results, query);
+}
+
+function displayResults(results, query) {
+    if (!searchPanel) return;
+
+    if (results.length === 0) {
+        searchHeader.textContent = 'لا توجد نتائج مطابقة';
+        searchResultsList.innerHTML = '<div class="search-no-results">🔍<br>لم يتم العثور على "' + query + '"</div>';
+        searchPanel.classList.add('visible');
+        return;
+    }
+
+    const unique = [];
+    const seen = new Set();
+    results.forEach(function(r) {
+        const key = r.pageId + '|' + r.title;
+        if (!seen.has(key)) {
+            seen.add(key);
+            unique.push(r);
+        }
+    });
+
+    searchHeader.textContent = 'تم العثور على ' + unique.length + ' نتيجة';
+
+    const iconFor = function(pageId) {
+        const icons = { 
+            home: '🏠', 
+            'book-answers': '📖',
+            quizzes: '📝', 
+            answers: '✅', 
+            exams: '🎓' 
+        };
+        return icons[pageId] || '📄';
+    };
+
+    const escapeHtml = function(text) {
+        return text.replace(/[&<>"']/g, function(m) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+        });
+    };
+
+    const highlight = function(text) {
+        const escaped = escapeHtml(text);
+        const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+        return escaped.replace(regex, '<mark>$1</mark>');
+    };
+
+    searchResultsList.innerHTML = unique.slice(0, 20).map(function(r) {
+        return '<div class="search-result-item" data-page="' + r.pageId + '" data-target="' + r.targetId + '">' +
+            '<div class="search-result-icon">' + iconFor(r.pageId) + '</div>' +
+            '<div class="search-result-content">' +
+                '<div class="search-result-title">' + highlight(r.title) + '</div>' +
+                '<div class="search-result-snippet">' + r.pageName + ' — ' + highlight(r.snippet) + '</div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+
+    searchResultsList.querySelectorAll('.search-result-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            const pageId = this.getAttribute('data-page');
+            const targetId = this.getAttribute('data-target');
+            navigateToResult(pageId, targetId);
+        });
+    });
+
+    searchPanel.classList.add('visible');
+}
+
+function navigateToResult(pageId, targetId) {
+    if (searchPanel) searchPanel.classList.remove('visible');
+    if (searchInput) searchInput.value = '';
+    if (searchClear) searchClear.classList.remove('visible');
+
+    showPage(pageId);
+
+    if (targetId) {
+        setTimeout(function() {
+            const el = document.getElementById(targetId);
+            if (el) {
+                const offset = 150;
+                const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: top, behavior: 'smooth' });
+
+                el.style.transition = 'background 0.5s';
+                const originalBg = el.style.background;
+                el.style.background = '#fff59d';
+                setTimeout(function() {
+                    el.style.background = originalBg || '';
+                }, 2000);
+            }
+        }, 300);
+    }
+}
+
+document.addEventListener('click', function(e) {
+    if (searchPanel && !e.target.closest('.search-bar')) {
+        searchPanel.classList.remove('visible');
+    }
+});
+
+/* ============================================
+   تبديل الوضع الليلي/النهاري
+   ============================================ */
+(function() {
+    const THEME_KEY = 'za3bot_qa_theme';
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        btn.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
+
+    // الوضع الافتراضي: نهاري (light)
+    const saved = localStorage.getItem(THEME_KEY) || 'light';
+    applyTheme(saved);
+
+    btn.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+        localStorage.setItem(THEME_KEY, next);
+    });
+})();
+
+/* ============================================
+   فتح الروابط الخارجية بأمان
+   ============================================ */
+function copyToClipboard(text){
+    try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(text);
+            return true;
+        }
+    }catch(e){}
+    try{
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        return true;
+    }catch(e){ return false; }
+}
+
+function openExternal(e, url){
+    let win = null;
+    try{
+        win = window.open(url, '_blank', 'noopener,noreferrer');
+    }catch(err){
+        win = null;
+    }
+    if(win){
+        e.preventDefault();
+        return false;
+    }
+    setTimeout(() => {
+        if(document.hasFocus()){
+            const copied = copyToClipboard(url);
+            alert((copied ? 'تم نسخ الرابط: ' : 'افتح هذا الرابط يدويًا: ') + url);
+        }
+    }, 600);
+    return true;
+}
+
+/* التهيئة عند التحميل */
+document.addEventListener('DOMContentLoaded', function() {
+    initNavigation();
+    showPage('home');
+
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        const validPages = ['home', 'book-answers', 'quizzes', 'answers', 'exams'];
+        if (validPages.includes(hash)) {
+            showPage(hash);
+        }
+    }
+});
+
+window.addEventListener('hashchange', function() {
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        const validPages = ['home', 'book-answers', 'quizzes', 'answers', 'exams'];
+        if (validPages.includes(hash)) {
+            showPage(hash);
+        }
+    }
+});
+</script>
+
+</body>
+</html>
